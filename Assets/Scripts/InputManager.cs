@@ -28,8 +28,8 @@ public class InputManager : MonoBehaviour
         grounded.Jump.performed += ctx => motor.Jump();
     }
 
-    // change FixedUpdate to Update if stutters happen
-    void Update()
+    // do not change this to Update(), this did not fix stutters
+    void FixedUpdate()
     {
         motor.ProcessMove(grounded.Movement.ReadValue<Vector2>());
     }

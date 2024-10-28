@@ -11,6 +11,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
     private float lastYrot = 0f;
+    public float jumpStrength = 3f;
 
     // gravity
     private bool isGrounded;
@@ -87,7 +88,7 @@ public class PlayerMotor : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)  {
-            gravityVec.y = 3f;
+            gravityVec.y = jumpStrength;
         }
     }
 }
