@@ -10,13 +10,11 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 vel = Vector3.zero;
     private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
+    private float lastYrot = 0f;
 
     // gravity
     private bool isGrounded;
     public float gravity = -9.8f;
-
-    // jump
-    public float jumpHeight = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,28 +26,32 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = charController.isGrounded;
+        if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
+            || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
+        {
+            print("Strafe!");
+        }
+        lastYrot = transform.eulerAngles.y;
     }
 
     // receives inputs from InputManager.cs and applies them to charController
     public void ProcessMove(Vector2 input)
     {
         // If the player is pressing any movement keys (WASD)
-        if (input != Vector2.zero)
-        {
+        if (input != Vector2.zero) {
             // Acceleration: Speed increases as long as the player is moving and vice versa
             speed = Mathf.Clamp(speed += 0.5f, 0f, 6f);
             moveDir.x = tweenMoveDir(moveDir.x, input.x);
             moveDir.z = tweenMoveDir(moveDir.z, input.y);
         }
-        else
-        {
+        else {
             speed = Mathf.Clamp(speed -= 0.5f, 0f, 6f);
+
             // Tween the moveDir to 0 when the player slows down enough.
             // This prevents "snapback" moments if the player were to start
             // moving in the opposite direction. moveDir can't be reset to
             // 0 upon the player stopping as it is needed for deceleration.
-            if (speed <= 1f)
-            {
+            if (speed <= 1f) {
                 moveDir.x = tweenMoveDir(moveDir.x, 0f);
                 moveDir.z = tweenMoveDir(moveDir.z, 0f);
             }
@@ -71,14 +73,11 @@ public class PlayerMotor : MonoBehaviour
     // tweens the moveDir vector to the input vector to make it smoother to move around.
     public float tweenMoveDir(float move, float input)
     {
-        if (move != input)
-        {
-            if (move < input)
-            {
+        if (move != input) {
+            if (move < input) {
                 move = Mathf.Clamp(move + 0.2f, -1f, input);
             }
-            else
-            {
+            else {
                 move = Mathf.Clamp(move - 0.2f, input, 1f);
             }
         }
@@ -87,8 +86,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded) 
-        {
+        if (isGrounded)  {
             gravityVec.y = 3f;
         }
     }
