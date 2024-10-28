@@ -15,7 +15,7 @@ public class PlayerMotor : MonoBehaviour
     public float gravity = -9.8f;
 
     // jump
-    public float jumpHeight = 0f;
+    public float jumpHeight = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded =  charController.isGrounded;
+        isGrounded = charController.isGrounded;
     }
 
     // receives inputs from InputManager.cs and applies them to charController
@@ -85,15 +85,18 @@ public class PlayerMotor : MonoBehaviour
         return move;
     }
 
-    public void jump()
+    public void Jump()
     {
         if (isGrounded) 
-        { 
+        {
             // TODO: I assume Evan wants to do this
             // imo the jump doesn't need to be too crazy bc im thinking of COD: WaW
             // but knowing Evan he'll do some other shit !!
             // something similar to Half Life's jump would be cool I think..
             // - Leo
+
+            // this is placheolder code (that does not work)
+            vel.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
 }

@@ -11,18 +11,32 @@ public class InputManager : MonoBehaviour
 
     private PlayerMotor motor;
 
+    private PlayerLook look;
+
     // Unity calls Awake when an enabled script instance is being loaded
     void Awake()
     {
         playerInput = new PlayerInput();
         grounded = playerInput.Grounded;
         motor = GetComponent<PlayerMotor>();
+        look = GetComponent<PlayerLook>();
+
+        // TODO: this does not work
+        // jump
+        // ctx = call back context
+        // when grounded jump is performed, ctx is used to call jump in PlayerMotor (motor)
+        grounded.Jump.performed += ctx => motor.Jump();
     }
 
     // change FixedUpdate to Update if stutters happen
     void FixedUpdate()
     {
         motor.ProcessMove(grounded.Movement.ReadValue<Vector2>());
+    }
+
+    private void LateUpdate()
+    {
+        look.ProcessLook(grounded.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()

@@ -437,6 +437,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &356295779 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1752880300978896585, guid: 935ba035a34a2464e9507d4f1f3c42bc, type: 3}
+  m_PrefabInstance: {fileID: 1072861293320386048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &956655309
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +811,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3032485585712940806, guid: 935ba035a34a2464e9507d4f1f3c42bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1072861293320386050}
+    - targetCorrespondingSourceObject: {fileID: 3032485585712940806, guid: 935ba035a34a2464e9507d4f1f3c42bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1072861293320386056}
   m_SourcePrefab: {fileID: 100100000, guid: 935ba035a34a2464e9507d4f1f3c42bc, type: 3}
 --- !u!1 &1072861293320386049 stripped
 GameObject:
@@ -837,7 +845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  gravity: -9.8
+  gravity: -7.48
+  jumpHeight: 4.21
 --- !u!143 &1072861293320386052
 CharacterController:
   m_ObjectHideFlags: 0
@@ -864,6 +873,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1072861293320386056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072861293320386049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b74203d1c35e7241a16b8476283a0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 356295779}
+  xSensitivity: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -44,6 +44,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""868ad23a-4918-436e-a8f5-3baaba93407e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4896676b-916b-49ca-9904-874ae4f432fd"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd98df4e-34a0-461f-8aef-9708da2c019b"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -188,6 +219,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Grounded = asset.FindActionMap("Grounded", throwIfNotFound: true);
         m_Grounded_Movement = m_Grounded.FindAction("Movement", throwIfNotFound: true);
         m_Grounded_Jump = m_Grounded.FindAction("Jump", throwIfNotFound: true);
+        m_Grounded_Look = m_Grounded.FindAction("Look", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -256,12 +288,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IGroundedActions> m_GroundedActionsCallbackInterfaces = new List<IGroundedActions>();
     private readonly InputAction m_Grounded_Movement;
     private readonly InputAction m_Grounded_Jump;
+    private readonly InputAction m_Grounded_Look;
     public struct GroundedActions
     {
         private @PlayerInput m_Wrapper;
         public GroundedActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Grounded_Movement;
         public InputAction @Jump => m_Wrapper.m_Grounded_Jump;
+        public InputAction @Look => m_Wrapper.m_Grounded_Look;
         public InputActionMap Get() { return m_Wrapper.m_Grounded; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -277,6 +311,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
         private void UnregisterCallbacks(IGroundedActions instance)
@@ -287,6 +324,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
         public void RemoveCallbacks(IGroundedActions instance)
@@ -308,5 +348,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }
