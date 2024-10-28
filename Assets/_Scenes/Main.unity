@@ -846,7 +846,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   gravity: -7.48
-  jumpHeight: 4.21
 --- !u!143 &1072861293320386052
 CharacterController:
   m_ObjectHideFlags: 0
@@ -886,7 +885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 356295779}
-  xSensitivity: 30
+  xSensitivity: 34.8
+  ySensitivity: 23.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -29,11 +29,12 @@ public class InputManager : MonoBehaviour
     }
 
     // change FixedUpdate to Update if stutters happen
-    void FixedUpdate()
+    void Update()
     {
         motor.ProcessMove(grounded.Movement.ReadValue<Vector2>());
     }
 
+    // called after all Update functions have been called
     private void LateUpdate()
     {
         look.ProcessLook(grounded.Look.ReadValue<Vector2>());
