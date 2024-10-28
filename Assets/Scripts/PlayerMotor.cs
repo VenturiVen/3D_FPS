@@ -8,6 +8,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController charController;
     public float speed = 0f;
     private Vector3 vel = Vector3.zero;
+    private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
 
     // gravity
@@ -55,15 +56,14 @@ public class PlayerMotor : MonoBehaviour
         }
 
         vel = transform.TransformDirection(moveDir) * speed * Time.deltaTime;
-
-        // gravity
-        vel.y += gravity * Time.deltaTime;
-
-        // prevents downward force on player from continuously increasing while grounded
-        if (isGrounded && vel.y < 0)
-            vel.y = -0.3f;
         charController.Move(vel);
 
+        // Using a separate Vec3 for gravity and jumping and another charController.Move
+        gravityVec.y += gravity * Time.deltaTime;
+        if (isGrounded && gravityVec.y < 0) {
+            gravityVec.y = -2f;
+        }
+        charController.Move(gravityVec * Time.deltaTime);
     }
 
     // This function is to smooth digital (e.g. WASD movement).
@@ -89,14 +89,7 @@ public class PlayerMotor : MonoBehaviour
     {
         if (isGrounded) 
         {
-            // TODO: I assume Evan wants to do this
-            // imo the jump doesn't need to be too crazy bc im thinking of COD: WaW
-            // but knowing Evan he'll do some other shit !!
-            // something similar to Half Life's jump would be cool I think..
-            // - Leo
-
-            // this is placheolder code (that does not work)
-            vel.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            gravityVec.y = 3f;
         }
     }
 }
