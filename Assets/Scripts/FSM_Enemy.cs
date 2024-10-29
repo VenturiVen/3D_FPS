@@ -15,5 +15,7 @@ public class FSM_Enemy : MonoBehaviour
         {
             current = next;
         }
+
+        transform.position += current.enemyVel * current.enemySpeed;
     }
 }
