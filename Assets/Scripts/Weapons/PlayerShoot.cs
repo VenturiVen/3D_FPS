@@ -11,13 +11,12 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            shootInput?.Invoke();
-
+            shootInput.Invoke();
         }
 
         if (Input.GetKeyDown(reloadKey))
         {
-            reloadInput?.Invoke();
+            reloadInput.Invoke();
         }
     }
 }

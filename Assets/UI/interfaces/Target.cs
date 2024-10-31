@@ -13,6 +13,5 @@ public class Target : MonoBehaviour, IDamageble
         {
             Destroy(gameObject);
         }
-
     }
 }
