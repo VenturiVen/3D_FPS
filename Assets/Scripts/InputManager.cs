@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
 
-        // TODO: this does not work
         // jump
         // ctx = call back context
         // when grounded jump is performed, ctx is used to call jump in PlayerMotor (motor)
@@ -32,11 +31,6 @@ public class InputManager : MonoBehaviour
     void FixedUpdate()
     {
         motor.ProcessMove(grounded.Movement.ReadValue<Vector2>());
-    }
-
-    // called after all Update functions have been called
-    private void LateUpdate()
-    {
         look.ProcessLook(grounded.Look.ReadValue<Vector2>());
     }
 
