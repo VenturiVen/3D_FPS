@@ -30,7 +30,7 @@ public class PlayerMotor : MonoBehaviour
         if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
             || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
         {
-            print("Strafe!");
+            Debug.Log("Strafe Angle met");
         }
         lastYrot = transform.eulerAngles.y;
     }
@@ -58,15 +58,15 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
-        vel = transform.TransformDirection(moveDir) * speed * 0.02f;
+        vel = transform.TransformDirection(moveDir) * speed * Time.deltaTime;
         charController.Move(vel);
 
         // Using a separate Vec3 for gravity and jumping and another charController.Move
-        gravityVec.y += gravity * 0.02f;
+        gravityVec.y += gravity * Time.deltaTime;
         if (isGrounded && gravityVec.y < 0) {
             gravityVec.y = -2f;
         }
-        charController.Move(gravityVec * 0.02f);
+        charController.Move(gravityVec * Time.deltaTime);
     }
 
     // This function is to smooth digital (e.g. WASD movement).
