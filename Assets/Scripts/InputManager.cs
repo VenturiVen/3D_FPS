@@ -16,7 +16,6 @@ public class InputManager : MonoBehaviour
     // Unity calls Awake when an enabled script instance is being loaded
     void Awake()
     {
-
         playerInput = new PlayerInput();
         grounded = playerInput.Grounded;
         motor = GetComponent<PlayerMotor>();
@@ -33,11 +32,13 @@ public class InputManager : MonoBehaviour
     void FixedUpdate()
     {
         motor.ProcessMove(grounded.Movement.ReadValue<Vector2>());
-        look.ProcessLook(grounded.Look.ReadValue<Vector2>());
     }
 
     // called after all Update functions have been called
-    
+    private void LateUpdate()
+    {
+        look.ProcessLook(grounded.Look.ReadValue<Vector2>());
+    }
 
     private void OnEnable()
     {
