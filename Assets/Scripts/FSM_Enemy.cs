@@ -19,6 +19,12 @@ public class FSM_Enemy : MonoBehaviour
         {
             current = next;
         }
+
+        // While this script is for the State Machine, We assume the enemy can move
+        // while in every state, so we put the code to do that here
+        // If there is a state where the enemy is not supposed to move we just
+        // make its velocity and/or speed 0
+        transform.position += current.enemyVel * current.enemySpeed * Time.deltaTime;
     }
 
     // Below code is for detecting if enemy is grounded
