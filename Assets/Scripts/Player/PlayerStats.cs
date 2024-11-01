@@ -46,13 +46,18 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            Debug.Log("Live");
+            Debug.Log("Live On");
         }
     }
 
     public void Heal(int num)
     {
         currentHP += num;
+
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
     }
 
     public void IncreaseSpeed(int num)

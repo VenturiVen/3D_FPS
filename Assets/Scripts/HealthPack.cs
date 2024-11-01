@@ -2,29 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDamageble
+public class HealthPack : MonoBehaviour
 {
-    private float health = 100f;
+
     private PlayerStats playerStats;
 
-    public void Damage(float damage)
+    void Update()
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        transform.Rotate(0, 50 * Time.deltaTime, 0); //rotates 50 degrees per second around y axis
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
-            if(playerStats == null){
+            if (playerStats == null)
+            {
                 playerStats = collision.gameObject.GetComponent<PlayerStats>();
             }
 
-            playerStats.TakeDamage(50);
+            playerStats.Heal(100);
+            Destroy(gameObject);
         }
     }
 }
