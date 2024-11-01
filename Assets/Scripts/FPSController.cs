@@ -33,6 +33,8 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked; // locks cursor to middle!
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
