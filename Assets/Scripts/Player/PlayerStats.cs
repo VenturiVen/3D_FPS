@@ -22,9 +22,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        // reset HP
-        currentHP = maxHP;
-
         // check if there already is an Instance
         if (Instance == null)
         {
@@ -37,8 +34,9 @@ public class PlayerStats : MonoBehaviour
     }
 
     // Bunch of methods to modify stats
+    // cannot be referenced like: PlayerStats.Instance.TakeDamage()
 
-    private void TakeDamage(int num)
+    public void TakeDamage(int num)
     {
         currentHP -= num;
 
@@ -46,29 +44,33 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Dead");
         }
+        else
+        {
+            Debug.Log("Live");
+        }
     }
 
-    private void Heal(int num)
+    public void Heal(int num)
     {
         currentHP += num;
     }
 
-    private void IncreaseSpeed(int num)
+    public void IncreaseSpeed(int num)
     {
         speedModifier += num;
     }
 
-    private void DecreaseSpeed(int num)
+    public void DecreaseSpeed(int num)
     {  
         speedModifier -= num;
     }
 
-    private void IncreaseMaxHP(int num)
+    public void IncreaseMaxHP(int num)
     {
         maxHP += num;
     }
 
-    private void DecreaseMaxHP(int num) 
+    public void DecreaseMaxHP(int num) 
     { 
         maxHP -= num; 
     }

@@ -31,7 +31,7 @@ public class PlayerMotor : MonoBehaviour
         if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
             || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
         {
-            Debug.Log("Strafe Angle met");
+            //Debug.Log("Strafe Angle met");
         }
         lastYrot = transform.eulerAngles.y;
     }
