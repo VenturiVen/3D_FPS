@@ -5,6 +5,9 @@ using UnityEngine;
 public class FSM_Enemy : MonoBehaviour
 {
     public EnemyState current;
+    public Vector3 newDir = new Vector3(0f, 0f, 0f);
+    public float newSpeed = 0f;
+    public bool newIsGrounded = false;
 
     void FixedUpdate()
     {
@@ -13,28 +16,34 @@ public class FSM_Enemy : MonoBehaviour
         // state. E.g. An enemy transitions between a chase state to a jump
         // state we can bring the velocity from the chase state to the jump state.
         // This is a state transition
-        EnemyState next = current?.Run();
+        EnemyState next = current?.Run(newDir, newSpeed, newIsGrounded);
 
         if (next != null)
         {
+            newIsGrounded = current.isGrounded;
+            newSpeed = current.enemySpeed;
+            //Debug.Log(current.enemySpeed);
+            newDir = current.enemyDir;
             current = next;
         }
-
-        // While this script is for the State Machine, We assume the enemy can move
-        // while in every state, so we put the code to do that here
-        // If there is a state where the enemy is not supposed to move we just
-        // make its velocity and/or speed 0
-        transform.position += current.enemyVel * current.enemySpeed * Time.deltaTime;
     }
 
     // Below code is for detecting if enemy is grounded
     // Commented out for now so I don't forget it. - Evan
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.transform.CompareTag("Ground"))
-    //    {
-    //        Debug.Log("FSM_Enemy is grounded");
-    //    }
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.CompareTag("Ground"))
+        {
+            newIsGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag("Ground"))
+        {
+            newIsGrounded = false;
+        }
+    }
 }

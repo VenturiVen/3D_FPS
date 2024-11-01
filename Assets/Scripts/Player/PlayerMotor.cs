@@ -12,7 +12,8 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 vel = Vector3.zero;
     private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
-    private float lastYrot = 0f;
+    //private float lastYrot = 0f;
+    public float jumpStrength = 3f;
 
     // gravity
     private bool isGrounded;
@@ -28,12 +29,12 @@ public class PlayerMotor : MonoBehaviour
     void FixedUpdate()
     {
         isGrounded = charController.isGrounded;
-        if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
-            || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
-        {
-            //Debug.Log("Strafe Angle met");
-        }
-        lastYrot = transform.eulerAngles.y;
+        //if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
+        //    || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
+        //{
+        //    Debug.Log("Strafe Angle met");
+        //}
+        //lastYrot = transform.eulerAngles.y;
     }
 
     // receives inputs from InputManager.cs and applies them to charController
