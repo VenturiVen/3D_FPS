@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
+    // PlayerStats.Instance.speedModifier
+    // PlayerStats.Instance.jumpStrength
 
     private CharacterController charController;
     public float speed = 0f;
@@ -41,12 +43,12 @@ public class PlayerMotor : MonoBehaviour
         // If the player is pressing any movement keys (WASD)
         if (input != Vector2.zero) {
             // Acceleration: Speed increases as long as the player is moving and vice versa
-            speed = Mathf.Clamp(speed += 0.5f, 0f, 6f);
+            speed = (Mathf.Clamp(speed += 0.5f, 0f, 6f));
             moveDir.x = tweenMoveDir(moveDir.x, input.x);
             moveDir.z = tweenMoveDir(moveDir.z, input.y);
         }
         else {
-            speed = Mathf.Clamp(speed -= 0.5f, 0f, 6f);
+            speed = (Mathf.Clamp(speed -= 0.5f, 0f, 6f));
 
             // Tween the moveDir to 0 when the player slows down enough.
             // This prevents "snapback" moments if the player were to start
@@ -88,7 +90,8 @@ public class PlayerMotor : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)  {
-            gravityVec.y = jumpStrength;
+            gravityVec.y = PlayerStats.Instance.jumpStrength;
         }
     }
+
 }
