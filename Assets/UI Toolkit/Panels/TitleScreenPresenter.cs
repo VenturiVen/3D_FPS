@@ -23,6 +23,8 @@ public class TitleScreenPresenter : MonoBehaviour
         */
 
         root.Q<Button>("Start").clicked += () => ChangeScene("Main");
+
+        root.Q<Button>("Exit").clicked += () => ExitGame();
     }
 
     // to add a scene to the build
@@ -32,5 +34,12 @@ public class TitleScreenPresenter : MonoBehaviour
     private void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Debug.Log("Scene changed to " + sceneName + ".");
+    }
+
+    void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game Closed.");
     }
 }
