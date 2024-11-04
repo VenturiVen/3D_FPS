@@ -11,12 +11,15 @@ public class GunData : ScriptableObject
     [Header("Name of Gun")]
     public new string name;
 
+    public bool useProjectile;
+
     [Header("Gun Statistics")]
     public int curCapacity;
     public int magSize;
     public float fireRate;
     public float damage;
-    public  float maxDistance;
+    public float maxDistance;
+    public float launchForce;
 
 
 

@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Sway Settings")] 
+    [SerializeField] private float smooth;
+    [SerializeField] private float swayMultiplier;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // get rawinput
+        float mouseX = Input.GetAxisRaw("Mouse X") * swayMultiplier;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * swayMultiplier;
+        
+        // calculate rotation
+        
+        Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
+        Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
+        
+        Quaternion rotation = rotationX * rotationY;
+        
+        // rotate
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, rotation, smooth * Time.deltaTime);
         
     }
 }

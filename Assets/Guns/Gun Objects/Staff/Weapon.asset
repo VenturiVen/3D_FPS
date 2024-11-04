@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Weapon
   m_EditorClassIdentifier: 
   name: Staff
-  curCapacity: 32
+  useProjectile: 1
+  curCapacity: 0
   magSize: 32
   fireRate: 930
   damage: 24
-  maxDistance: 1000
+  maxDistance: 10
+  launchForce: 1000
   reloadTime: 0.425
   reloading: 0
