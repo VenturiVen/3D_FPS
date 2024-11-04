@@ -31,6 +31,18 @@ public class PlayerStats : MonoBehaviour
         {
             Destroy(global::PlayerStats.Instance);
         }
+
+        currentHP = maxHP;
+    }
+
+    public int getCurrentHP()
+    {
+        return currentHP;
+    }
+
+    public int getMaxHP()
+    {
+        return maxHP;
     }
 
     // Bunch of methods to modify stats
