@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 6308298807747635117}
   - component: {fileID: 2870913661832215193}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_PSX
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
