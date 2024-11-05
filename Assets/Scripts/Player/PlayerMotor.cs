@@ -93,7 +93,7 @@ public class PlayerMotor : MonoBehaviour
             gravityVec.y = PlayerStats.Instance.jumpStrength;
         }
     }
-
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Ground"))

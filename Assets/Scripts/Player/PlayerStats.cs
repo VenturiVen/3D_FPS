@@ -20,6 +20,10 @@ public class PlayerStats : MonoBehaviour
     public float speedModifier;
     public float jumpStrength;
 
+    [Header("Movement Stats")]
+    public int score;
+
+
     private void Awake()
     {
         // check if there already is an Instance
