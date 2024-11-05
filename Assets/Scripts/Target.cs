@@ -20,11 +20,7 @@ public class Target : MonoBehaviour, IDamageble
     {
         if (collision.transform.CompareTag("Player"))
         {
-            if(playerStats == null){
-                playerStats = collision.gameObject.GetComponent<PlayerStats>();
-            }
-
-            playerStats.TakeDamage(50);
+            PlayerStats.Instance.TakeDamage(50);
         }
     }
 }
