@@ -31,7 +31,7 @@ public class FSM_Enemy : MonoBehaviour
     // Below code is for detecting if enemy is grounded
     // Commented out for now so I don't forget it. - Evan
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Ground"))
         {

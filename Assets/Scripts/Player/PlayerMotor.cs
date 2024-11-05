@@ -7,34 +7,49 @@ public class PlayerMotor : MonoBehaviour
     // PlayerStats.Instance.speedModifier
     // PlayerStats.Instance.jumpStrength
 
-    private CharacterController charController;
+    private Rigidbody character;
     public float speed = 0f;
     private Vector3 vel = Vector3.zero;
     private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
     //private float lastYrot = 0f;
-    public float jumpStrength = 3f;
+    public int jumpStrength = 4;
 
     // gravity
     private bool isGrounded;
+    RaycastHit hit;
     public float gravity = -9.8f;
 
     // Start is called before the first frame update
     void Start()
     {
-        charController = GetComponent<CharacterController>();
+        character = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //isGrounded = charController.isGrounded;
         //if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
         //    || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
         //{
         //    Debug.Log("Strafe Angle met");
         //}
         //lastYrot = transform.eulerAngles.y;
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out hit, 1f))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded= false;
+        }
+        Debug.Log(isGrounded);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position - transform.up * 1, 0.2f);
     }
 
     // receives inputs from InputManager.cs and applies them to charController
@@ -60,15 +75,8 @@ public class PlayerMotor : MonoBehaviour
             }
         }
 
-        vel = transform.TransformDirection(moveDir) * speed * Time.deltaTime;
-        charController.Move(vel);
-
-        // Using a separate Vec3 for gravity and jumping and another charController.Move
-        gravityVec.y += gravity * Time.deltaTime;
-        if (isGrounded && gravityVec.y < 0) {
-            gravityVec.y = -2f;
-        }
-        charController.Move(gravityVec * Time.deltaTime);
+        vel = transform.TransformDirection(moveDir) * speed;
+        character.MovePosition(transform.position + vel * Time.deltaTime);
     }
 
     // This function is to smooth digital (e.g. WASD movement).
@@ -90,6 +98,7 @@ public class PlayerMotor : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)  {
+<<<<<<< HEAD
             gravityVec.y = PlayerStats.Instance.jumpStrength;
         }
     }
@@ -107,6 +116,9 @@ public class PlayerMotor : MonoBehaviour
         if (other.transform.CompareTag("Ground"))
         {
             isGrounded = false;
+=======
+            character.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+>>>>>>> d05cafc (New Player Movement)
         }
     }
 }
