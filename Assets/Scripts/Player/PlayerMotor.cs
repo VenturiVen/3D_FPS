@@ -13,7 +13,6 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 gravityVec = Vector3.zero;
     private Vector3 moveDir = Vector3.zero;
     //private float lastYrot = 0f;
-    public int jumpStrength = 4;
 
     // gravity
     private bool isGrounded;
@@ -44,6 +43,7 @@ public class PlayerMotor : MonoBehaviour
             isGrounded= false;
         }
         Debug.Log(isGrounded);
+        PlayerStats.Instance.currentPos = transform.position;
     }
 
     private void OnDrawGizmos()
@@ -98,7 +98,7 @@ public class PlayerMotor : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)  {
-            character.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
+            character.AddForce(transform.up * PlayerStats.Instance.jumpStrength, ForceMode.Impulse);
         }
     }
 }

@@ -16,6 +16,7 @@ public class EnemyIdleState : EnemyState
         this.enemySpeed = enemySpeed;
         this.isGrounded = isGrounded;
         transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
+        transform.parent.parent.rotation = Quaternion.LookRotation(enemyDir);
         if (this.isGrounded)
         {
             this.enemySpeed *= 2;

@@ -18,9 +18,10 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Movement Stats")]
     public float speedModifier;
-    public float jumpStrength;
+    public int jumpStrength = 1;
+    public Vector3 currentPos;
 
-    [Header("Movement Stats")]
+    [Header("Score Stats")]
     public int score;
 
 

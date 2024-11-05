@@ -15,7 +15,10 @@ public class EnemyAttackState : EnemyState
         this.enemyDir = enemyDir;
         this.enemySpeed = enemySpeed;
         this.isGrounded = isGrounded;
-        transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
+        transform.parent.parent.position =
+            Vector3.MoveTowards(transform.position, PlayerStats.Instance.currentPos,
+            enemySpeed * Time.deltaTime);
+        transform.parent.parent.LookAt(PlayerStats.Instance.currentPos);
         //Debug.Log("Currently Attacking!");
         //Debug.Log(enemySpeed);
 
