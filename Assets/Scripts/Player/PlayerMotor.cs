@@ -28,7 +28,7 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        isGrounded = charController.isGrounded;
+        //isGrounded = charController.isGrounded;
         //if ((transform.eulerAngles.y > lastYrot - 2 && transform.eulerAngles.y < lastYrot)
         //    || (transform.eulerAngles.y < lastYrot + 2 && transform.eulerAngles.y > lastYrot))
         //{
@@ -93,5 +93,20 @@ public class PlayerMotor : MonoBehaviour
             gravityVec.y = PlayerStats.Instance.jumpStrength;
         }
     }
+   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
 }
