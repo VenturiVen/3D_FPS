@@ -98,27 +98,7 @@ public class PlayerMotor : MonoBehaviour
     public void Jump()
     {
         if (isGrounded)  {
-<<<<<<< HEAD
-            gravityVec.y = PlayerStats.Instance.jumpStrength;
-        }
-    }
-   
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.CompareTag("Ground"))
-        {
-            isGrounded = false;
-=======
             character.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
->>>>>>> d05cafc (New Player Movement)
         }
     }
 }
