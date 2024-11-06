@@ -17,6 +17,7 @@ public class Target : MonoBehaviour, IDamageble
 
         if (health <= 0)
         {
+            PlayerStats.Instance.IncreaseScore(100);
             SpawnDamageParticles();
             Destroy(gameObject);
             Debug.Log($"{gameObject.name} has been destroyed.");

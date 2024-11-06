@@ -69,9 +69,11 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         timeSinceLastShot += Time.deltaTime;
         Debug.DrawRay(cam.position, cam.forward * gunData.maxDistance, Color.red);
+        PlayerStats.Instance.currentCap = gunData.curCapacity;
+        PlayerStats.Instance.magSize = gunData.magSize;
     }
 }

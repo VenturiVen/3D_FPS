@@ -24,6 +24,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Score Stats")]
     public int score;
 
+    [Header("Gun Stats")]
+    public int currentCap;
+    public int magSize;
+
 
     private void Awake()
     {
@@ -48,6 +52,11 @@ public class PlayerStats : MonoBehaviour
     public int getMaxHP()
     {
         return maxHP;
+    }
+
+    public int getScore()
+    {
+        return score;
     }
 
     // Bunch of methods to modify stats
@@ -75,6 +84,11 @@ public class PlayerStats : MonoBehaviour
         {
             currentHP = maxHP;
         }
+    }
+
+    public void IncreaseScore(int num)
+    {
+        score += num;
     }
 
     public void IncreaseSpeed(int num)
