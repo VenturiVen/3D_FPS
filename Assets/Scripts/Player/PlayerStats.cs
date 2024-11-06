@@ -74,16 +74,12 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int num)
     {
+        currentHP -= num;
 
         if (currentHP <= 0)
         {
             currentHP = 0;
             PlayerDeath();
-        }
-        else
-        {
-            currentHP -= num;
-            Debug.Log("Live On");
         }
     }
 
