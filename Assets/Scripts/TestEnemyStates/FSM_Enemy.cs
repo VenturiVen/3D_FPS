@@ -8,6 +8,8 @@ public class FSM_Enemy : MonoBehaviour
     public Vector3 newDir = new Vector3(0f, 0f, 0f);
     public float newSpeed = 0f;
     public bool newIsGrounded = false;
+    public bool newContact = false;
+    RaycastHit hit;
 
     void FixedUpdate()
     {
@@ -16,34 +18,46 @@ public class FSM_Enemy : MonoBehaviour
         // state. E.g. An enemy transitions between a chase state to a jump
         // state we can bring the velocity from the chase state to the jump state.
         // This is a state transition
-        EnemyState next = current?.Run(newDir, newSpeed, newIsGrounded);
+        EnemyState next = current?.Run(newDir, newSpeed, newIsGrounded, newContact);
 
         if (next != null)
         {
             newIsGrounded = current.isGrounded;
             newSpeed = current.enemySpeed;
-            //Debug.Log(current.enemySpeed);
             newDir = current.enemyDir;
+            newContact = current.isContact;
             current = next;
+        }
+
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out hit, 1f))
+        {
+            newIsGrounded = true;
+        }
+        else
+        {
+            newIsGrounded = false;
         }
     }
 
-    // Below code is for detecting if enemy is grounded
-    // Commented out for now so I don't forget it. - Evan
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position - transform.up * 1, 0.2f);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Ground"))
+        if (other.CompareTag("Player"))
         {
-            newIsGrounded = true;
+            newContact = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("Ground"))
+        if (other.CompareTag("Player"))
         {
-            newIsGrounded = false;
+            newContact = false;
         }
     }
 }
