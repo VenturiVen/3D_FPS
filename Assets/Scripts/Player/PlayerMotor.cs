@@ -42,7 +42,6 @@ public class PlayerMotor : MonoBehaviour
         {
             isGrounded= false;
         }
-        Debug.Log(isGrounded);
         PlayerStats.Instance.currentPos = transform.position;
     }
 
