@@ -24,6 +24,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Score Stats")]
     public int score;
 
+    [Header("Gun Stats")]
+    public int currentCap;
+    public int magSize;
+
 
     private void Awake()
     {
@@ -50,19 +54,25 @@ public class PlayerStats : MonoBehaviour
         return maxHP;
     }
 
+    public int getScore()
+    {
+        return score;
+    }
+
     // Bunch of methods to modify stats
     // cannot be referenced like: PlayerStats.Instance.TakeDamage()
 
     public void TakeDamage(int num)
     {
-        currentHP -= num;
 
         if (currentHP <= 0)
         {
+            currentHP = 0;
             Debug.Log("Dead");
         }
         else
         {
+            currentHP -= num;
             Debug.Log("Live On");
         }
     }
@@ -75,6 +85,11 @@ public class PlayerStats : MonoBehaviour
         {
             currentHP = maxHP;
         }
+    }
+
+    public void IncreaseScore(int num)
+    {
+        score += num;
     }
 
     public void IncreaseSpeed(int num)
