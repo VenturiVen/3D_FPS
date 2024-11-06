@@ -7,6 +7,9 @@ public class Target : MonoBehaviour, IDamageble
     private float health = 100f;
     private PlayerStats playerStats;
 
+    [SerializeField] private ParticleSystem killParticles;
+    private ParticleSystem killParticlesInstance;
+
     public void Damage(float damage)
     {
         health -= damage;
@@ -14,9 +17,16 @@ public class Target : MonoBehaviour, IDamageble
 
         if (health <= 0)
         {
+            SpawnDamageParticles();
             Destroy(gameObject);
             Debug.Log($"{gameObject.name} has been destroyed.");
         }
+    }
+
+    private void SpawnDamageParticles()
+    {
+            // spawn kill particles at current transformation
+            killParticlesInstance = Instantiate(killParticles, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter(Collider other)
