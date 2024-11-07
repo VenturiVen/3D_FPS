@@ -14,7 +14,6 @@ public class HealthPack : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(timer);
         if (timer > 0)
         {
             timer--;
