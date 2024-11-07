@@ -14,6 +14,12 @@ public class Projectiles : MonoBehaviour
     // init
     public void Initialize(Vector3 dir, float dmg, float maxDist)
     {
+        if (gunData == null)
+        {
+            Debug.LogError("gunData is not assigned in Projectiles.");
+            return;
+        }
+        
         direction = dir.normalized;
         damageAmount = dmg;
         maxDistance = gunData.maxDistance;

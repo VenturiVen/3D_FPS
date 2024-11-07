@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9253826b65a1a2b409675072e814237a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: 4ce7797208250c44880f6fac751803de, type: 2}
+  gunData: {fileID: 11400000, guid: c5167a51dc245974dbe989f1f9dbd84b, type: 2}
   velocity: 10
   maxDistance: 20
 --- !u!135 &7298035362044405074

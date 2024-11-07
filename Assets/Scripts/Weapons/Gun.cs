@@ -15,10 +15,12 @@ public class Gun : MonoBehaviour
         PlayerShoot.shootInput += Shoot;
         PlayerShoot.reloadInput += StartReload;
     }
+    
+    private void OnDisable() => gunData.reloading = false;
 
     public void StartReload()
     {
-        if (!gunData.reloading)
+        if (!gunData.reloading && this.gameObject.activeSelf)
         {
             StartCoroutine(Reload());
         }
@@ -43,7 +45,7 @@ public class Gun : MonoBehaviour
     {
         if (gunData.curCapacity > 0 && CanShoot())
         {
-            //check if hitscan or projectile
+            // check if hitscan or projectile
             if (gunData.useProjectile == false)
             {
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit raycastHit, gunData.maxDistance))
@@ -61,6 +63,10 @@ public class Gun : MonoBehaviour
                 if (projectileScript != null)
                 {
                     projectileScript.Initialize(cam.forward, gunData.damage, gunData.maxDistance);
+                }
+                else
+                {
+                    Debug.LogError("Projectiles script is missing on projectilePrefab.");
                 }
             }
             
