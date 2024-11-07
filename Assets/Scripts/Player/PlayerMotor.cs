@@ -42,6 +42,13 @@ public class PlayerMotor : MonoBehaviour
             isGrounded= false;
         }
         PlayerStats.Instance.currentPos = transform.position;
+        
+        if (PlayerStats.Instance.knockback)
+        {
+            Debug.Log("Exploding");
+            character.AddExplosionForce(5f, PlayerStats.Instance.knockbackPos, 10f, 3f, ForceMode.Impulse);
+            PlayerStats.Instance.knockback = false;
+        }
     }
 
     private void OnDrawGizmos()

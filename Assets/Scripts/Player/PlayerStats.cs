@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Health Stats")]
     public int maxHP;
     public int currentHP;
+    public int healthPackRespawnTime = 300;
 
     [Header("Movement Stats")]
     public float speedModifier;
@@ -25,6 +26,7 @@ public class PlayerStats : MonoBehaviour
     public int currentScore;
     public int scoreAdded = 100;
     public int scoreGoal = 1000;
+    public int timer = 300;
 
     [Header("Gun Stats")]
     public int currentCap;
@@ -32,6 +34,8 @@ public class PlayerStats : MonoBehaviour
 
     [Header("States")]
     public bool isAlive = true;
+    public bool knockback = false;
+    public Vector3 knockbackPos = Vector3.zero;
 
     [Header("Panels")]
     [SerializeField] GameObject gameOverPanel;
@@ -76,8 +80,10 @@ public class PlayerStats : MonoBehaviour
     // Bunch of methods to modify stats
     // cannot be referenced like: PlayerStats.Instance.TakeDamage()
 
-    public void TakeDamage(int num)
+    public void TakeDamage(int num, Vector3 pos)
     {
+        knockbackPos = pos;
+        knockback = true;
         currentHP -= num;
 
         if (currentHP <= 0)

@@ -21,7 +21,7 @@ public class EnemyIdleState : EnemyState
 
         if (this.isGrounded)
         {
-            this.enemySpeed *= 2;
+            this.enemySpeed *= 3;
             return attack;
         }
         return this;

@@ -32,18 +32,6 @@ public class Target : MonoBehaviour, IDamageble
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the colliding object is the player
-        if (other.CompareTag("Player"))
-        {
-            if (playerStats == null)
-            {
-                playerStats = other.GetComponent<PlayerStats>();
-            }
-
-            playerStats?.TakeDamage(50);
-            Debug.Log("Player took damage from Target.");
-        }
-        
         // Check if the colliding object is a projectile
         if (other.CompareTag("Projectile"))
         {
@@ -54,6 +42,12 @@ public class Target : MonoBehaviour, IDamageble
                 Damage(projectile.GetDamage());
                 Destroy(other.gameObject); // Destroy the projectile on collision
             }
+        }
+
+        if (other.CompareTag("DeathPlane"))
+        {
+            Debug.Log("Dying!");
+            Destroy(gameObject);
         }
     }
 }

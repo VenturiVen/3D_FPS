@@ -23,9 +23,9 @@ public class EnemyHitState : EnemyState
         this.isGrounded = isGrounded;
         timer -= 1;
 
-        if (timer <= 70 && timer >= 50 && !playerHasBeenHit)
+        if (timer <= 70 && timer >= 50 && !playerHasBeenHit && isContact)
         {
-            PlayerStats.Instance.TakeDamage(30);
+            PlayerStats.Instance.TakeDamage(30, transform.position);
             playerHasBeenHit = true;
         }
 
