@@ -36,8 +36,8 @@ public class HUDText : MonoBehaviour
     {
         textmeshpro_currentHP_text = textmeshpro_currentHP.GetComponent<TextMeshProUGUI>();
         textmeshpro_maxHP_text = textmeshpro_maxHP.GetComponent<TextMeshProUGUI>();
-        textmeshpro_currentAmmo_text = textmeshpro_currentAmmo.GetComponent<TextMeshProUGUI>();
-        textmeshpro_maxAmmo_text = textmeshpro_maxAmmo.GetComponent<TextMeshProUGUI>();
+        //textmeshpro_currentAmmo_text = textmeshpro_currentAmmo.GetComponent<TextMeshProUGUI>();
+       //textmeshpro_maxAmmo_text = textmeshpro_maxAmmo.GetComponent<TextMeshProUGUI>();
         textmeshpro_score_text = textmeshpro_score.GetComponent<TextMeshProUGUI>();
     }
 
@@ -49,8 +49,8 @@ public class HUDText : MonoBehaviour
         // getting the values
         currentHP = PlayerStats.Instance.getCurrentHP();
         maxHP = PlayerStats.Instance.getMaxHP();
-        currentAmmo = PlayerStats.Instance.currentCap;
-        maxAmmo = PlayerStats.Instance.magSize;
+        //currentAmmo = PlayerStats.Instance.currentCap;
+        //maxAmmo = PlayerStats.Instance.magSize;
         score = PlayerStats.Instance.getCurrentScore();
 
         if (!PlayerStats.Instance.isAlive)
@@ -61,8 +61,8 @@ public class HUDText : MonoBehaviour
         // converting the values to string to be used by TextMeshPro
         textmeshpro_currentHP_text.text = currentHP.ToString("000");
         textmeshpro_maxHP_text.text = "/" + maxHP.ToString("000");
-        textmeshpro_currentAmmo_text.text = currentAmmo.ToString("000");
-        textmeshpro_maxAmmo_text.text = "/" + maxAmmo.ToString("000");
+        //textmeshpro_currentAmmo_text.text = currentAmmo.ToString("000");
+        //textmeshpro_maxAmmo_text.text = "/" + maxAmmo.ToString("000");
         textmeshpro_score_text.text = score.ToString("00000"); // padding with zeroes
     }
 }
