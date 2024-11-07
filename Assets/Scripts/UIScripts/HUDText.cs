@@ -51,7 +51,7 @@ public class HUDText : MonoBehaviour
         maxHP = PlayerStats.Instance.getMaxHP();
         currentAmmo = PlayerStats.Instance.currentCap;
         maxAmmo = PlayerStats.Instance.magSize;
-        score = PlayerStats.Instance.getScore();
+        score = PlayerStats.Instance.getCurrentScore();
 
         // converting the values to string to be used by TextMeshPro
         textmeshpro_currentHP_text.text = currentHP.ToString("000");

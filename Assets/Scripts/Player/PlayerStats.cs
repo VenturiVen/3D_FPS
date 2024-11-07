@@ -22,7 +22,8 @@ public class PlayerStats : MonoBehaviour
     public Vector3 currentPos;
 
     [Header("Score Stats")]
-    public int score;
+    public int currentScore;
+    public int scoreAdded = 100;
 
     [Header("Gun Stats")]
     public int currentCap;
@@ -33,10 +34,12 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Panels")]
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject perkPanel;
 
     public void Start()
     {
         gameOverPanel.SetActive(false);
+        perkPanel.SetActive(false);
     }
 
     private void Awake()
@@ -64,9 +67,9 @@ public class PlayerStats : MonoBehaviour
         return maxHP;
     }
 
-    public int getScore()
+    public int getCurrentScore()
     {
-        return score;
+        return currentScore;
     }
 
     // Bunch of methods to modify stats
@@ -93,9 +96,26 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void IncreaseScore(int num)
+    public void IncreaseScore()
     {
-        score += num;
+        currentScore += scoreAdded;
+
+        // #TODO: If score reaches goal of, e.g., 1000, then show perk screen.
+        // this is temporary
+        if (currentScore >= 100)
+        {
+            PlayerGainPerk();
+        }
+
+    }
+
+    public void IncreaseScoreAdded(float num)
+    {
+        scoreAdded += (int)(scoreAdded * num);
+    }
+    public void DecreaseScoreAdded(float num)
+    {
+        scoreAdded -= (int)(scoreAdded * num);
     }
 
     public void PlayerDeath()
@@ -107,24 +127,32 @@ public class PlayerStats : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void IncreaseSpeed(int num)
+    public void PlayerGainPerk()
     {
-        speedModifier += num;
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0;
+        perkPanel.SetActive(true);
     }
-
-    public void DecreaseSpeed(int num)
-    {  
-        speedModifier -= num;
-    }
-
-    public void IncreaseMaxHP(int num)
+    
+    public void IncreaseSpeed(float num)
     {
-        maxHP += num;
+        speedModifier += (int)(speedModifier * num);
     }
 
-    public void DecreaseMaxHP(int num) 
-    { 
-        maxHP -= num; 
+    public void DecreaseSpeed(float num)
+    {
+        speedModifier -= (int)(speedModifier * num);
+    }
+
+    public void IncreaseMaxHP(float num)
+    {
+        maxHP += (int)(maxHP * num);
+    }
+
+    public void DecreaseMaxHP(float num) 
+    {
+        maxHP -= (int)(maxHP * num);
     }
 
 }

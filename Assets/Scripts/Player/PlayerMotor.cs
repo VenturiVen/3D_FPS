@@ -17,7 +17,6 @@ public class PlayerMotor : MonoBehaviour
     // gravity
     private bool isGrounded;
     RaycastHit hit;
-    public float gravity = -9.8f;
 
     // Start is called before the first frame update
     void Start()
