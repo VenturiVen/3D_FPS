@@ -31,7 +31,7 @@ public class PlayerStats : MonoBehaviour
     public int magSize;
 
     [Header("States")]
-    public bool isAlive;
+    public bool isAlive = true;
 
     [Header("Panels")]
     [SerializeField] GameObject gameOverPanel;
@@ -121,13 +121,12 @@ public class PlayerStats : MonoBehaviour
     public void PlayerDeath()
     {
         // pause game
-        Time.timeScale = 0;
-        isAlive = false;
         UnityEngine.Cursor.visible = true;
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         // GameObject.Destroy(gameObject);
         // ^ cause too many problems when restarting the game
         gameOverPanel.SetActive(true);
+        isAlive = false;
     }
 
     public void PlayerGainPerk()

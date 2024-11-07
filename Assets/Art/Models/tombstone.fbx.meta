@@ -1,44 +1,9 @@
 fileFormatVersion: 2
-guid: 0d1b7cdf3f3941341a1d4328ca7b378c
+guid: 0219e2846e6cd8c41ae9417a0ffe14ad
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cobble
-    second: {fileID: 2100000, guid: d6a1f83aade342347984077683e08415, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Concrete
-    second: {fileID: 2100000, guid: 69c86e6ff1f4cf642bbb1c7190a2fc59, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Flesh
-    second: {fileID: 2100000, guid: 7f816e405f5c0b840aaf8e9ca36e3eda, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Froth
-    second: {fileID: 2100000, guid: 88c82cea510f6a841a916b1f763a0ac4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Grass
-    second: {fileID: 2100000, guid: 484be7edc488bb84caa4c899daee3a10, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GrassEdge
-    second: {fileID: 2100000, guid: e5598e9be8fe47143a03aa17f360f239, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Volcano
-    second: {fileID: 2100000, guid: d4a917f5b1337be45ba8eb2bbaa48aaa, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -72,7 +37,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 0.1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
