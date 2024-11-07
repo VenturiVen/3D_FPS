@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0d1b7cdf3f3941341a1d4328ca7b378c
+guid: 24a1ce2cb1aaf4f479c6dcba7215a16d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,38 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cobble
-    second: {fileID: 2100000, guid: d6a1f83aade342347984077683e08415, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Concrete
-    second: {fileID: 2100000, guid: 69c86e6ff1f4cf642bbb1c7190a2fc59, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Flesh
-    second: {fileID: 2100000, guid: 7f816e405f5c0b840aaf8e9ca36e3eda, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Froth
-    second: {fileID: 2100000, guid: 88c82cea510f6a841a916b1f763a0ac4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Grass
-    second: {fileID: 2100000, guid: 484be7edc488bb84caa4c899daee3a10, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GrassEdge
-    second: {fileID: 2100000, guid: e5598e9be8fe47143a03aa17f360f239, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Volcano
-    second: {fileID: 2100000, guid: d4a917f5b1337be45ba8eb2bbaa48aaa, type: 2}
+      name: Rock
+    second: {fileID: 2100000, guid: 6aade89fe9bc21b4eb01296ce9bf7112, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -70,9 +40,9 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
@@ -125,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.001
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

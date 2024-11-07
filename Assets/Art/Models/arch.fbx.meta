@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0d1b7cdf3f3941341a1d4328ca7b378c
+guid: e36aaa239c91f98448d798d551dd6448
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,38 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cobble
-    second: {fileID: 2100000, guid: d6a1f83aade342347984077683e08415, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Concrete
-    second: {fileID: 2100000, guid: 69c86e6ff1f4cf642bbb1c7190a2fc59, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Flesh
-    second: {fileID: 2100000, guid: 7f816e405f5c0b840aaf8e9ca36e3eda, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Froth
-    second: {fileID: 2100000, guid: 88c82cea510f6a841a916b1f763a0ac4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Grass
-    second: {fileID: 2100000, guid: 484be7edc488bb84caa4c899daee3a10, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GrassEdge
-    second: {fileID: 2100000, guid: e5598e9be8fe47143a03aa17f360f239, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Volcano
-    second: {fileID: 2100000, guid: d4a917f5b1337be45ba8eb2bbaa48aaa, type: 2}
+      name: Arch
+    second: {fileID: 2100000, guid: f6b3520eb40a29c4e8b87daa1ff7fbc1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -70,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 0.6
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
@@ -125,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.001
+    globalScale: 0.006
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
