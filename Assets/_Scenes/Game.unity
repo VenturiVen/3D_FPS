@@ -2770,6 +2770,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24a1ce2cb1aaf4f479c6dcba7215a16d, type: 3}
   m_PrefabInstance: {fileID: 1626579990}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1740128539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1572546226343950544, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+  m_PrefabInstance: {fileID: 5682077331215516182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1740128542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740128539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b53f29c3b56b842b1a595c66431c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smooth: 5
+  swayMultiplier: 5
 --- !u!1001 &1794593093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3709,6 +3728,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 272842919086429519, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+      propertyPath: isAlive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 272842919086429519, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: perkPanel
       value: 
       objectReference: {fileID: 2176220171961681218}
@@ -3723,7 +3746,7 @@ PrefabInstance:
     - target: {fileID: 1270512166424818889, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: gunData
       value: 
-      objectReference: {fileID: 11400000, guid: c5167a51dc245974dbe989f1f9dbd84b, type: 2}
+      objectReference: {fileID: 11400000, guid: 02248274c601b964498a3a601046929a, type: 2}
     - target: {fileID: 1364420958441190360, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.36
@@ -3763,6 +3786,10 @@ PrefabInstance:
     - target: {fileID: 1364420958441190360, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1572546226343950544, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+      propertyPath: m_Name
+      value: Hitscan
       objectReference: {fileID: 0}
     - target: {fileID: 4000479449034587358, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: m_Name
@@ -3816,7 +3843,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4667338202037155312, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1898064061}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1572546226343950544, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1740128542}
   m_SourcePrefab: {fileID: 100100000, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
 --- !u!1001 &7005479050768991031
 PrefabInstance:

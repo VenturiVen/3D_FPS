@@ -53,6 +53,11 @@ public class HUDText : MonoBehaviour
         maxAmmo = PlayerStats.Instance.magSize;
         score = PlayerStats.Instance.getCurrentScore();
 
+        if (!PlayerStats.Instance.isAlive)
+        {
+            Time.timeScale = 0;
+        }
+
         // converting the values to string to be used by TextMeshPro
         textmeshpro_currentHP_text.text = currentHP.ToString("000");
         textmeshpro_maxHP_text.text = "/" + maxHP.ToString("000");

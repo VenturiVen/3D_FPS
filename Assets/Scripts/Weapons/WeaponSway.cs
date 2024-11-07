@@ -8,14 +8,14 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float smooth;
     [SerializeField] private float swayMultiplier;
 
-    private void Update()
+    void FixedUpdate()
     {
         // get rawinput
         float mouseX = Input.GetAxisRaw("Mouse X") * swayMultiplier;
         float mouseY = Input.GetAxisRaw("Mouse Y") * swayMultiplier;
-        
+
         // calculate rotation
-        
+
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
         
