@@ -57,12 +57,12 @@ public class PlayerMotor : MonoBehaviour
         // If the player is pressing any movement keys (WASD)
         if (input != Vector2.zero) {
             // Acceleration: Speed increases as long as the player is moving and vice versa
-            speed = (Mathf.Clamp(speed += 0.5f, 0f, 6f));
+            speed = (Mathf.Clamp(speed += 0.5f, 0f, PlayerStats.Instance.speedModifier));
             moveDir.x = tweenMoveDir(moveDir.x, input.x);
             moveDir.z = tweenMoveDir(moveDir.z, input.y);
         }
         else {
-            speed = (Mathf.Clamp(speed -= 0.5f, 0f, 6f));
+            speed = (Mathf.Clamp(speed -= 0.5f, 0f, PlayerStats.Instance.speedModifier));
 
             // Tween the moveDir to 0 when the player slows down enough.
             // This prevents "snapback" moments if the player were to start
