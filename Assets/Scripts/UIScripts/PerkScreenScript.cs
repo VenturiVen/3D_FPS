@@ -10,6 +10,8 @@ public class PerkScreen : MonoBehaviour
     public void DisablePanel()
     {
         perkPanel.SetActive(false);
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
     }
 

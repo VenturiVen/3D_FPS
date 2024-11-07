@@ -15,9 +15,9 @@ MonoBehaviour:
   name: Staff
   useProjectile: 1
   useHitscan: 0
-  curCapacity: 16
+  curCapacity: -4
   magSize: 16
-  fireRate: 200
+  fireRate: 120
   damage: 50
   maxDistance: 20
   launchForce: 0

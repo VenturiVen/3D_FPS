@@ -4,7 +4,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GunData gunData;
-    [SerializeField] private Transform cam; //
+    [SerializeField] private Transform cam; 
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawn;
     
@@ -20,18 +20,27 @@ public class Gun : MonoBehaviour
 
     public void StartReload()
     {
-        if (!gunData.reloading && this.gameObject.activeSelf)
+        if (this.gameObject != null)
         {
-            StartCoroutine(Reload());
+            if (!gunData.reloading && this.gameObject.activeSelf)
+            {
+                StartCoroutine(Reload());
+            }
+        } else if (this.gameObject == null)
+        {
+            Debug.Log("Gun does not exist.");
         }
     }
-
+    
     private IEnumerator Reload()
     {
         gunData.reloading = true;
         yield return new WaitForSeconds(gunData.reloadTime);
-        gunData.curCapacity = gunData.magSize;
-        gunData.reloading = false;
+        if(gunData != null)
+        {
+            gunData.curCapacity = gunData.magSize;
+            gunData.reloading = false;
+        }
     }
 
     private bool CanShoot()
@@ -43,7 +52,8 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (gunData.curCapacity > 0 && CanShoot())
+         //if (gunData.curCapacity > 0 && CanShoot())
+        if (CanShoot())
         {
             // check if hitscan or projectile
             if (gunData.useProjectile == false)
@@ -70,7 +80,7 @@ public class Gun : MonoBehaviour
                 }
             }
             
-            gunData.curCapacity--;
+            // gunData.curCapacity--;
             timeSinceLastShot = 0;
         }
     }
