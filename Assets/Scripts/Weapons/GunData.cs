@@ -9,6 +9,7 @@ public class GunData : ScriptableObject
     public new string name;
 
     public bool useProjectile;
+    public bool useHitscan;
 
     [Header("Gun Statistics")]
     public int curCapacity;

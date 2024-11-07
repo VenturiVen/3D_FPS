@@ -9,8 +9,6 @@ public class FSM_Enemy : MonoBehaviour
     public float newSpeed = 0f;
     public bool newIsGrounded = false;
     public bool newContact = false;
-    private PlayerStats playerStats;
-
     RaycastHit hit;
 
     void FixedUpdate()
