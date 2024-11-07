@@ -126,6 +126,7 @@ public class PlayerStats : MonoBehaviour
         UnityEngine.Cursor.visible = true;
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         // GameObject.Destroy(gameObject);
+        // ^ cause too many problems when restarting the game
         gameOverPanel.SetActive(true);
     }
 
