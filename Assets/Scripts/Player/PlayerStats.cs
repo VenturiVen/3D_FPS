@@ -28,6 +28,16 @@ public class PlayerStats : MonoBehaviour
     public int currentCap;
     public int magSize;
 
+    [Header("States")]
+    public bool isAlive;
+
+    [Header("Panels")]
+    [SerializeField] GameObject gameOverPanel;
+
+    public void Start()
+    {
+        gameOverPanel.SetActive(false);
+    }
 
     private void Awake()
     {
@@ -64,16 +74,12 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int num)
     {
+        currentHP -= num;
 
         if (currentHP <= 0)
         {
             currentHP = 0;
-            Debug.Log("Dead");
-        }
-        else
-        {
-            currentHP -= num;
-            Debug.Log("Live On");
+            PlayerDeath();
         }
     }
 
@@ -90,6 +96,15 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseScore(int num)
     {
         score += num;
+    }
+
+    public void PlayerDeath()
+    {
+        isAlive = false;
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        GameObject.Destroy(gameObject);
+        gameOverPanel.SetActive(true);
     }
 
     public void IncreaseSpeed(int num)

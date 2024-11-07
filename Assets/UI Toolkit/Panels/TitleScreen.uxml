@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Styles/Labels.uss?fileID=7433441132597879392&amp;guid=5c04fc9d27d86c945a20fc8af61b0b87&amp;type=3#Labels" />
     <Style src="project://database/Assets/UI%20Toolkit/Styles/Buttons.uss?fileID=7433441132597879392&amp;guid=4063905a9238f3643b2d0f6868dff623&amp;type=3#Buttons" />
-    <ui:VisualElement name="Background" style="flex-grow: 1; flex-direction: column; background-color: rgba(172, 4, 4, 0); background-image: url(&quot;project://database/Assets/UI/UI_Assets/tempBG.png?fileID=2800000&amp;guid=aaadb7bcc47f9f14fb7343a492e18760&amp;type=3#tempBG&quot;);">
+    <ui:VisualElement name="Background" style="flex-grow: 1; flex-direction: column; background-image: url(&quot;project://database/Assets/UI/UI_Assets/tempBG.png?fileID=2800000&amp;guid=aaadb7bcc47f9f14fb7343a492e18760&amp;type=3#tempBG&quot;);">
         <ui:VisualElement name="Title" style="flex-grow: 0; flex-shrink: 1; flex-direction: row; flex-wrap: nowrap; width: 500px; justify-content: space-around; align-self: center; height: 200px; margin-top: 86px; align-items: stretch;">
             <ui:Label tabindex="-1" text="Codex Gigas" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="label-main-title" style="-unity-text-align: upper-center; font-size: 129px;" />
         </ui:VisualElement>

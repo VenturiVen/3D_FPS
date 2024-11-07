@@ -58,6 +58,6 @@ public class HUDText : MonoBehaviour
         textmeshpro_maxHP_text.text = "/" + maxHP.ToString("000");
         textmeshpro_currentAmmo_text.text = currentAmmo.ToString("000");
         textmeshpro_maxAmmo_text.text = "/" + maxAmmo.ToString("000");
-        textmeshpro_score_text.text = score.ToString("00000"); // padding with zeroes
+        textmeshpro_score_text.text = score.ToString("000000"); // padding with zeroes
     }
 }
