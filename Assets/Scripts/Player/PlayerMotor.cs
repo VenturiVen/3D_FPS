@@ -106,4 +106,12 @@ public class PlayerMotor : MonoBehaviour
             character.AddForce(transform.up * PlayerStats.Instance.jumpStrength, ForceMode.Impulse);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DeathPlane"))
+        {
+            PlayerStats.Instance.TakeDamage(900, transform.position);
+        }
+    }
 }
