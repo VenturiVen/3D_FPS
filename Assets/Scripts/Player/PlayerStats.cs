@@ -158,4 +158,14 @@ public class PlayerStats : MonoBehaviour
         maxHP -= (int)(maxHP * num);
     }
 
+    public void IncreaseJumpStrength(float num)
+    {
+        jumpStrength += (int)(jumpStrength * num);
+    }
+
+    public void DecreaseJumpStrength(float num)
+    {
+        jumpStrength -= (int)(jumpStrength * num);
+    }
+
 }

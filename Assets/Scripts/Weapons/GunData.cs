@@ -18,7 +18,7 @@ public class GunData : ScriptableObject
     public float damage;
     public float maxDistance;
     public float launchForce;
-
+   
     [Header("Reloading")]
     public float reloadTime;
     public bool reloading;
