@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Score Stats")]
     public int currentScore;
     public int scoreAdded = 100;
+    public int scoreGoal = 1000;
 
     [Header("Gun Stats")]
     public int currentCap;
@@ -77,16 +78,12 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int num)
     {
+        currentHP -= num;
 
         if (currentHP <= 0)
         {
             currentHP = 0;
             PlayerDeath();
-        }
-        else
-        {
-            currentHP -= num;
-            Debug.Log("Live On");
         }
     }
 
@@ -104,10 +101,9 @@ public class PlayerStats : MonoBehaviour
     {
         currentScore += scoreAdded;
 
-        // #TODO: If score reaches goal of, e.g., 1000, then show perk screen.
-        // this is temporary
-        if (currentScore >= 100)
+        if (currentScore >= scoreGoal)
         {
+            scoreGoal += 1000;
             PlayerGainPerk();
         }
 
@@ -124,10 +120,12 @@ public class PlayerStats : MonoBehaviour
 
     public void PlayerDeath()
     {
+        // pause game
+        Time.timeScale = 0;
         isAlive = false;
         UnityEngine.Cursor.visible = true;
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
-        GameObject.Destroy(gameObject);
+        // GameObject.Destroy(gameObject);
         gameOverPanel.SetActive(true);
     }
 

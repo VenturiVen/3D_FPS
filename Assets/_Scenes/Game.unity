@@ -1233,6 +1233,14 @@ PrefabInstance:
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1938325514}
+    - target: {fileID: 272842919086429519, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+      propertyPath: speedModifier
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1270512166424818889, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
+      propertyPath: gunData
+      value: 
+      objectReference: {fileID: 11400000, guid: c5167a51dc245974dbe989f1f9dbd84b, type: 2}
     - target: {fileID: 1364420958441190360, guid: 258977ff2a57e374583e3a3c46fbc4b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.759998

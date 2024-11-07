@@ -25,7 +25,7 @@ public class EnemyHitState : EnemyState
 
         if (timer <= 70 && timer >= 50 && !playerHasBeenHit)
         {
-            PlayerStats.Instance.currentHP -= 20;
+            PlayerStats.Instance.TakeDamage(30);
             playerHasBeenHit = true;
         }
 

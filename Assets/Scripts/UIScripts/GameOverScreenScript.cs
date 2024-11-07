@@ -7,11 +7,13 @@ public class GameOverScript : MonoBehaviour
 {
     public void RestartBtn()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Game");
     }
     
     public void ToMenuBtn()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("TitleScreen");
     }
 }
