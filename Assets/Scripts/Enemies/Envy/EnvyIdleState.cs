@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvyRetreatState : EnvyState
+public class EnvyIdleState : EnvyState
 {
-
     public override EnvyState Run()
     {
         return this;
@@ -24,7 +23,7 @@ public class EnvyRetreatState : EnvyState
         if (this.isGrounded)
         {
             this.enemySpeed *= 3;
-            
+
         }
         return this;
     }

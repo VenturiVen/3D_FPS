@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvyChaseState : EnemyState
+public class EnvyChaseState : EnvyState
 {
-    public override EnemyState Run()
+    public override EnvyState Run()
     {
         return this;
     }
 
-    public override EnemyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isContact)
+    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
     {
-        this.isContact = isContact;
         this.enemyDir = enemyDir;
         this.enemySpeed = enemySpeed;
         this.isGrounded = isGrounded;
+        this.isPlayerContact = isPlayerContact;
+        this.isEnemyContact = isEnemyContact;
 
         transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
 

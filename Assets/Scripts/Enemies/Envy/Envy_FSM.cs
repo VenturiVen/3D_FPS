@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Envy_FSM : MonoBehaviour
+{
+    // assign current state to Envy in inpsector
+    // Envy starts off in this state
+    public EnvyState current;
+
+    public Vector3 newDir = new Vector3(0f, 0f, 0f);
+    public float newSpeed = 0f;
+    public bool newIsGrounded = false; 
+    public bool newPlayerContact = false; // tracking if Envy is in contact with player
+    public bool newEnemyContact = false; // tracking if Envy is in contact with other enemies (for steering purposes)
+    RaycastHit hit;
+
+    void FixedUpdate()
+    {
+        // state transition
+        // once a state is called, its public variables are passed as params
+        // for instantiating the next state
+        EnvyState next = current?.Run(newDir, newSpeed, newIsGrounded, newPlayerContact, newEnemyContact);
+
+        if (next != null)
+        {
+            // changing values to that of the new state
+            newDir = current.enemyDir;
+            newSpeed = current.enemySpeed;
+            newIsGrounded = current.isGrounded;
+            newPlayerContact = current.isPlayerContact;
+            newEnemyContact = current.isEnemyContact;
+            current = next;
+        }
+
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out hit, 1f))
+        {
+            newIsGrounded = true;
+        }
+        else
+        {
+            newIsGrounded = false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position - transform.up * 1, 0.2f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            newPlayerContact = true;
+        } 
+        if (other.CompareTag("Enemy"))
+        {
+            newEnemyContact = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            newPlayerContact = false;
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            newEnemyContact = false;
+        }
+    }
+}
