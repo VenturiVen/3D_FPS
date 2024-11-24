@@ -43,6 +43,7 @@ public class Envy_FSM : MonoBehaviour
         }
     }
 
+    // not seen in the game
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -53,6 +54,7 @@ public class Envy_FSM : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player Contact");
             newPlayerContact = true;
         } 
         if (other.CompareTag("Enemy"))
@@ -65,6 +67,7 @@ public class Envy_FSM : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("NOT Contact");
             newPlayerContact = false;
         }
         if (other.CompareTag("Enemy"))

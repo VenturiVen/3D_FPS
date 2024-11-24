@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnvyAttackState : EnvyState
 {
+    // return to switch to the specified state
+    public EnvyIdleState idle;
+    public EnvyChaseState chase;
+
     public override EnvyState Run()
     {
         return this;
