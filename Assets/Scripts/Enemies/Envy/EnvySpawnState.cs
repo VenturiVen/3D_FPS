@@ -55,9 +55,9 @@ public class EnvySpawnState : EnvyState
 
     // coroutines are good for delaying actions/code
     // good explanation of coroutines: https://youtu.be/kUP6OK36nrM?si=gKOAfMASZtJWyJCn
-    IEnumerator SpawnTime (float timeToSpawn)
+    IEnumerator SpawnTime (int timeToSpawn)
     {
-        Debug.Log("Countdown started.");
+        //Debug.Log("Countdown started.");
         yield return new WaitForSecondsRealtime(timeToSpawn);
         countdownFinished = true;   
     }

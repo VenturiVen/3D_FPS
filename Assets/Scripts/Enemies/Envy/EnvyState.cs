@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// every class of an Envy state inherits this class
 public abstract class EnvyState : MonoBehaviour
 {
     public Vector3 enemyDir = new Vector3(0f, 0f, 0f);
@@ -10,10 +11,9 @@ public abstract class EnvyState : MonoBehaviour
     public bool isPlayerContact = false; // tracking if enemy is in contact with player
     public bool isEnemyContact = false; // tracking if enemy is in contact with other enemies (for steering purposes)
 
-    // state transition conditons
-    // deleted these for now, don't think they are necessary
-    // as state transition will handles this
-    /*
+    /* state transition conditons
+     * deleted these for now, don't think they are necessary
+     * 
     public bool isPlayerInChaseRange = false;
     public bool isPlayerInAttackRange = false;
     public bool isPlayerInJumpAttackRange = false;

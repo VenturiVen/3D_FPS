@@ -54,7 +54,7 @@ public class Envy_FSM : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player Contact");
+            //Debug.Log("Player Contact");
             newPlayerContact = true;
         } 
         if (other.CompareTag("Enemy"))

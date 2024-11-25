@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnvyRetreatState : EnvyState
-{
-
+{ 
     // return to switch to the specified state
     public EnvyIdleState idle;
     public EnvyChaseState chase;
@@ -16,14 +15,14 @@ public class EnvyRetreatState : EnvyState
 
     public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
     {
-
+        // assigning variables
         this.enemyDir = enemyDir;
         this.enemySpeed = enemySpeed;
         this.isGrounded = isGrounded;
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
 
-        transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
+        //transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
 
         if (this.isGrounded)
         {
