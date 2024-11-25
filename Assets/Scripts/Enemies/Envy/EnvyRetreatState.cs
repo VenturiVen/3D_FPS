@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnvyRetreatState : EnvyState
 { 
     // return to switch to the specified state
-    public EnvyIdleState idle;
     public EnvyChaseState chase;
+    public EnvyDespawnState despawn;
+
+    public EnvySpawnState spawn;
 
     public override EnvyState Run()
     {
@@ -22,13 +25,27 @@ public class EnvyRetreatState : EnvyState
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
 
-        //transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
-
-        if (this.isGrounded)
+        if (!isPlayerContact)
         {
-            this.enemySpeed *= 3;
-            
+            transform.parent.parent.position =
+            Vector3.MoveTowards(transform.position, spawn.getSpawnLocation(),
+            enemySpeed * Time.deltaTime);
         }
+
+        if (isPlayerContact)
+        {
+            Debug.Log("Chase State");
+            return chase;
+        }
+
+        // Vector3.Distance(target, gameObject.transform.position);
+
+        if ((Vector3.Distance(spawn.getSpawnLocation(), gameObject.transform.position) == 0) )
+        {
+            Debug.Log("Despawn State");
+            return despawn;
+        }
+        
         return this;
     }
 }

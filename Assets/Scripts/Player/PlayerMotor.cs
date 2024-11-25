@@ -45,7 +45,7 @@ public class PlayerMotor : MonoBehaviour
         
         if (PlayerStats.Instance.knockback)
         {
-            Debug.Log("Exploding");
+            //Debug.Log("Exploding");
             character.AddExplosionForce(5f, PlayerStats.Instance.knockbackPos, 10f, 3f, ForceMode.Impulse);
             PlayerStats.Instance.knockback = false;
         }
