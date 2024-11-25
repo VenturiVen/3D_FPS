@@ -18,6 +18,8 @@ public class EnvySpawnState : EnvyState
     private bool countdownStarted = false;
     private bool countdownFinished = false;
 
+    public Vector3 spawnLocation = Vector3.zero;
+
     public override EnvyState Run()
     {
         return this;
@@ -44,6 +46,9 @@ public class EnvySpawnState : EnvyState
         }
         else if (countdownFinished) // if countdown has finished, switch to idle state
         {
+            // set initial location as Envy's spawn location
+            setSpawnLocation();
+
             // change to idle state
             Debug.Log("Idle State");
             return idle;
@@ -61,5 +66,15 @@ public class EnvySpawnState : EnvyState
         yield return new WaitForSecondsRealtime(timeToSpawn);
         countdownFinished = true;   
     }
-    
+
+    private void setSpawnLocation()
+    {
+        spawnLocation = transform.position;
+    }
+
+    public Vector3 getSpawnLocation()
+    {
+        return spawnLocation;
+    }
+
 }

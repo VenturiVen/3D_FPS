@@ -7,6 +7,8 @@ public class EnvyDespawnState : EnvyState
 
     // despawn state should only return "this" or destroy object (not to be confused with the enemy being killed).
 
+    Envy_FSM envyFSM;
+
     public override EnvyState Run()
     {
         return this;
@@ -21,13 +23,16 @@ public class EnvyDespawnState : EnvyState
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
 
-        transform.parent.parent.position += (this.enemyDir * (this.enemySpeed * Time.deltaTime));
+        // #TODO: play despawning animation
 
-        if (this.isGrounded)
-        {
-            this.enemySpeed *= 3;
-            
-        }
+        Debug.Log("Envy Despawned");
+        DespawnEnvy();
+
         return this;
+    }
+
+    public void DespawnEnvy()
+    {
+        Destroy(transform.parent.parent.gameObject);
     }
 }

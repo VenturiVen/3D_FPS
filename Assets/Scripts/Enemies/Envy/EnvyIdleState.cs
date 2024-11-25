@@ -36,6 +36,8 @@ public class EnvyIdleState : EnvyState
             // check if player is in contact
             if (isPlayerContact)
             {
+                countdownFinished = false;
+                countdownStarted = false;
                 Debug.Log("Chase State");
                 return chase;
             }
