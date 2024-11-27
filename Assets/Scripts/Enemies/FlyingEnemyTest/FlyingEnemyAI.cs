@@ -1,6 +1,9 @@
 using UnityEngine;
 public class FlyingEnemyAI : MonoBehaviour
 {
+    [Header("Model Settings")]
+    [SerializeField] private GameObject enemyModel; // New serialized field for the model
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float patrolRadius = 10f;
@@ -30,6 +33,14 @@ public class FlyingEnemyAI : MonoBehaviour
         // When enemy spawns, remember the position of the spawn.
         spawnPoint = transform.position;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        
+        // Makes sure both Parent and EnemyModel are the same
+        if (enemyModel != null)
+        {
+            enemyModel.transform.position = transform.position;
+            enemyModel.transform.rotation = transform.rotation;
+        }
+
         // Start off patrolling the area you spawned in
         currentState = EnemyState.Patrolling;
         patrolState = new FlyingPatrolState(this);
@@ -43,6 +54,13 @@ public class FlyingEnemyAI : MonoBehaviour
         if (player == null) return;
         UpdateState();
         ExecuteState();
+
+        // Sync the nodel with the Parent FlyingEnemy.
+        if (enemyModel != null)
+        {
+            enemyModel.transform.position = transform.position;
+            enemyModel.transform.rotation = transform.rotation;
+        }
     }
 
     private void UpdateState()
@@ -112,12 +130,13 @@ public class FlyingEnemyAI : MonoBehaviour
     public Transform GetPlayer() => player;
     public float getSidetoSideSpeed() => sideToSideSpeed;
     public float getSidetoSideAmplitude() => sideToSideAmplitude;
+    public GameObject GetEnemyModel() => enemyModel;
 
     
-    // Draw Radius and Range of Patrol, detection for the enemy and surrounding the enemy
+    // Draw Radii and Range of Patrol, detection for the enemy and surrounding the enemy including the raycast of the enemy.
     private void OnDrawGizmosSelected()
     {
-        // If spawn point hasn't been set in Play mode, use current position in Edit mode
+        // If there is no Spawner used to spawn the enemy, use current position in Edit mode.
         Vector3 currentSpawnPoint = spawnPoint != Vector3.zero ? spawnPoint : transform.position;
 
         Gizmos.color = Color.blue;
@@ -128,5 +147,11 @@ public class FlyingEnemyAI : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, surroundDistance);
+
+        if (raycastOrigin != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(raycastOrigin.position, raycastOrigin.forward * detectionRange);
+        }
     }
 }

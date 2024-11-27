@@ -17,5 +17,6 @@ public class FlyingChaseState : FlyingState
 
         Vector3 direction = (enemyAI.GetPlayer().position - enemyAI.transform.position).normalized;
         enemyAI.transform.position += direction * enemyAI.GetMoveSpeed() * Time.deltaTime;
+        enemyAI.transform.rotation = Quaternion.LookRotation(direction);
     }
 }

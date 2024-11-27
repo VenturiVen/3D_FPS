@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 public class FlyingAttackState : FlyingState
 {
     private float shootTimer;

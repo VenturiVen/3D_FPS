@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7298035362044405074}
   - component: {fileID: 5842990469696510254}
   m_Layer: 0
-  m_Name: Projectile 1
+  m_Name: EnemyProjectiles
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93463c12501dfe4f9f39cc12e5716bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
+  damageAmount: 5
   lifespan: 5
-  projectileSpeed: 10
+  projectileSpeed: 5
 --- !u!1 &6539314101042433325
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d613890fcdf547f44b3fb2836f26e723, type: 2}
+  - {fileID: 2100000, guid: 122f5c4f29c08a54b8299ce4f5f1488c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
