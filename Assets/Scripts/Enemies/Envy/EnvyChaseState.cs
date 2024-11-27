@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.AI;
 
 public class EnvyChaseState : EnvyState
 {
@@ -19,6 +20,11 @@ public class EnvyChaseState : EnvyState
     // distance is the difference between the player and Envy's current location
     float distance = 0f;
 
+    //NavMesh
+    public GameObject Envy;
+    public Transform player;
+    private NavMeshAgent navMeshAgent;
+
     public override EnvyState Run()
     {
         return this;
@@ -34,9 +40,12 @@ public class EnvyChaseState : EnvyState
         this.isEnemyContact = isEnemyContact;
 
         // target equals player's current position
-        target = PlayerStats.Instance.currentPos;
+        // target = PlayerStats.Instance.currentPos;
         // distance equals player's current position minus Envy's current position
-        distance = Vector3.Distance(target, gameObject.transform.position); 
+        distance = Vector3.Distance(player.position, gameObject.transform.position);
+
+        // NavMesh
+        navMeshAgent = Envy.GetComponent<NavMeshAgent>();
 
         if (!isPlayerContact) 
         {
@@ -57,13 +66,17 @@ public class EnvyChaseState : EnvyState
         }
         */
 
-
+        /*
         transform.parent.parent.position =
-            Vector3.MoveTowards(transform.position, PlayerStats.Instance.currentPos,
+            Vector3.MoveTowards(transform.position, target,
             enemySpeed * Time.deltaTime);
+        */
+        
+        navMeshAgent.destination = player.position;
+
 
         // target.y = 0f;
-        transform.parent.parent.LookAt(target);
+        transform.parent.parent.LookAt(player.position);
 
         return this;
     }
