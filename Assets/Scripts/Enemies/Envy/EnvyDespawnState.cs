@@ -7,8 +7,6 @@ public class EnvyDespawnState : EnvyState
 
     // despawn state should only return "this" or destroy object (not to be confused with the enemy being killed).
 
-    Envy_FSM envyFSM;
-
     public override EnvyState Run()
     {
         return this;
