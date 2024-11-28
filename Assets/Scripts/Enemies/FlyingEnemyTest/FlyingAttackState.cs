@@ -38,6 +38,8 @@ public class FlyingAttackState : FlyingState
         // Use Lerp to smooth transitions from previous noise values. ( did not help :c )
         noiseX = Mathf.Lerp(previousNoiseX, noiseX, Time.deltaTime * noiseSmoothingFactor);
         noiseZ = Mathf.Lerp(previousNoiseZ, noiseZ, Time.deltaTime * noiseSmoothingFactor);
+        previousNoiseX = noiseX;
+        previousNoiseZ = noiseZ;
         
         // Create an offset based off the Perlin Noise.
         Vector3 noiseOffset = new Vector3(noiseX, 0, noiseZ) * sideToSideAmplitude;
