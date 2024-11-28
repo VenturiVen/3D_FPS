@@ -16,7 +16,7 @@ public class EnvyRetreatState : EnvyState
         return this;
     }
 
-    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
+    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact, bool isPlayerSight)
     {
         // assigning variables
         this.enemyDir = enemyDir;
@@ -34,8 +34,11 @@ public class EnvyRetreatState : EnvyState
 
         if (isPlayerContact)
         {
-            Debug.Log("Chase State");
-            return chase;
+            if (isPlayerSight)
+            {
+                Debug.Log("Chase State");
+                return chase;
+            }
         }
 
         // Vector3.Distance(target, gameObject.transform.position);

@@ -21,7 +21,7 @@ public class EnvyIdleState : EnvyState
         return this;
     }
 
-    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
+    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact, bool isPlayerSight)
     {
         // assigning variables
         this.enemyDir = enemyDir;
@@ -36,10 +36,13 @@ public class EnvyIdleState : EnvyState
             // check if player is in contact
             if (isPlayerContact)
             {
-                countdownFinished = false;
-                countdownStarted = false;
-                Debug.Log("Chase State");
-                return chase;
+                if (isPlayerSight)
+                {
+                    countdownFinished = false;
+                    countdownStarted = false;
+                    Debug.Log("Chase State");
+                    return chase;
+                }
             }
             // if player is not in contact, start countdown
             else if (!countdownStarted)

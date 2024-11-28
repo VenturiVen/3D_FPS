@@ -30,7 +30,7 @@ public class EnvyChaseState : EnvyState
         return this;
     }
 
-    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
+    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact, bool isPlayerSight)
     {
         //Debug.Log("Chasing...");
         this.enemyDir = enemyDir;
@@ -64,12 +64,6 @@ public class EnvyChaseState : EnvyState
             Debug.Log("Jump Attack State");
             return jumpAttack;
         }
-        */
-
-        /*
-        transform.parent.parent.position =
-            Vector3.MoveTowards(transform.position, target,
-            enemySpeed * Time.deltaTime);
         */
         
         navMeshAgent.destination = player.position;

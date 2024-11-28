@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.HID;
 
 public class Envy_FSM : MonoBehaviour
 {
@@ -14,14 +16,17 @@ public class Envy_FSM : MonoBehaviour
     public bool newIsGrounded = false; 
     public bool newPlayerContact = false; // tracking if Envy is in contact with player
     public bool newEnemyContact = false; // tracking if Envy is in contact with other enemies (for steering purposes)
-    RaycastHit hit;
+    public bool newPlayerSight = false;
+    RaycastHit ray;
+
+    public Transform player;
 
     void FixedUpdate()
     {
         // state transition
         // once a state is called, its public variables are passed as params
         // for instantiating the next state
-        EnvyState next = current?.Run(newDir, newSpeed, newIsGrounded, newPlayerContact, newEnemyContact);
+        EnvyState next = current?.Run(newDir, newSpeed, newIsGrounded, newPlayerContact, newEnemyContact, newPlayerSight);
 
         if (next != null)
         {
@@ -34,7 +39,7 @@ public class Envy_FSM : MonoBehaviour
             current = next;
         }
 
-        if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out hit, 1f))
+        if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out ray, 1f))
         {
             newIsGrounded = true;
         }
@@ -42,6 +47,7 @@ public class Envy_FSM : MonoBehaviour
         {
             newIsGrounded = false;
         }
+
     }
 
     // not seen in the game
@@ -57,6 +63,14 @@ public class Envy_FSM : MonoBehaviour
         {
             //Debug.Log("Player Contact");
             newPlayerContact = true;
+            if (Physics.Linecast(transform.position, player.position, out ray))
+            {
+                if (ray.collider.CompareTag("Player"))
+                {
+                    newPlayerSight = true;
+                }
+            }
+
         } 
         if (other.CompareTag("Enemy"))
         {

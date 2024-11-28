@@ -10,6 +10,7 @@ public abstract class EnvyState : MonoBehaviour
     public bool isGrounded = false;
     public bool isPlayerContact = false; // tracking if enemy is in contact with player
     public bool isEnemyContact = false; // tracking if enemy is in contact with other enemies (for steering purposes)
+    public bool isPlayerSight = false; // tracking if enemy can see player
 
     /* state transition conditons
      * deleted these for now, don't think they are necessary
@@ -20,5 +21,5 @@ public abstract class EnvyState : MonoBehaviour
     */
 
     public abstract EnvyState Run();
-    public abstract EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact);
+    public abstract EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact, bool isPlayerSight);
 }
