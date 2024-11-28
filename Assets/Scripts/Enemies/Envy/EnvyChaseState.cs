@@ -25,6 +25,11 @@ public class EnvyChaseState : EnvyState
     public Transform player;
     private NavMeshAgent navMeshAgent;
 
+    private void Start()
+    {
+        navMeshAgent = Envy.GetComponent<NavMeshAgent>();
+    }
+
     public override EnvyState Run()
     {
         return this;
@@ -43,9 +48,6 @@ public class EnvyChaseState : EnvyState
         // target = PlayerStats.Instance.currentPos;
         // distance equals player's current position minus Envy's current position
         distance = Vector3.Distance(player.position, gameObject.transform.position);
-
-        // NavMesh
-        navMeshAgent = Envy.GetComponent<NavMeshAgent>();
 
         if (!isPlayerContact) 
         {
