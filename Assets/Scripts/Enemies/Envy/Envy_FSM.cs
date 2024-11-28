@@ -36,7 +36,19 @@ public class Envy_FSM : MonoBehaviour
             newIsGrounded = current.isGrounded;
             newPlayerContact = current.isPlayerContact;
             newEnemyContact = current.isEnemyContact;
+            newPlayerSight = current.isPlayerSight;
             current = next;
+        }
+
+        if (newPlayerContact)
+        {
+            if (Physics.Linecast(transform.position, player.position, out ray))
+            {
+                if (ray.collider.CompareTag("Player"))
+                {
+                    newPlayerSight = true;
+                }
+            }
         }
 
         if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out ray, 1f))
@@ -63,14 +75,6 @@ public class Envy_FSM : MonoBehaviour
         {
             //Debug.Log("Player Contact");
             newPlayerContact = true;
-            if (Physics.Linecast(transform.position, player.position, out ray))
-            {
-                if (ray.collider.CompareTag("Player"))
-                {
-                    newPlayerSight = true;
-                }
-            }
-
         } 
         if (other.CompareTag("Enemy"))
         {

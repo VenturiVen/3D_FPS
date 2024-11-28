@@ -546,7 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: {fileID: 403747535}
   newDir: {x: 0, y: 0, z: 0}
-  newSpeed: 2.5
+  newSpeed: 2
   newIsGrounded: 0
   newPlayerContact: 0
   newEnemyContact: 0
@@ -752,7 +752,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15.69
+  m_Radius: 9.55
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -1131,6 +1131,7 @@ MonoBehaviour:
   idle: {fileID: 1638404420}
   timeToSpawn: 3
   spawnLocation: {x: 0, y: 0, z: 0}
+  Envy: {fileID: 103207328}
 --- !u!1001 &415782698
 PrefabInstance:
   m_ObjectHideFlags: 0
