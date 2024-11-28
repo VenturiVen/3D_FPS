@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NavEnemyWaitState : MonoBehaviour
+public class NavEnemyWaitState : NavEnemyState
 {
-    // Start is called before the first frame update
-    void Start()
+    private int timer = 100;
+    public NavMeshAgent agent;
+    public NavEnemyChaseState chase;
+    public override NavEnemyState Run()
     {
-        
+        return this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NavEnemyState Run(float enemySpeed, int contact)
     {
-        
+        this.enemySpeed = enemySpeed;
+        this.contact = contact;
+
+        agent.speed = this.enemySpeed;
+
+        if (timer == 0)
+        {
+            Debug.Log("Agent: Going back to chasing the Player");
+            this.enemySpeed = 4f;
+            timer = 100;
+            return chase;
+        }
+
+        timer--;
+
+        return this;
     }
 }

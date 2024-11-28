@@ -69,8 +69,6 @@ public class NavEnemy : MonoBehaviour
                 }
             }
         }
-        // This doesnt work atm: Going to fix tmw
-        // The enemy just keeps going after the player since it is always gonna be in range
         else
         {
             if (other.CompareTag("Player"))

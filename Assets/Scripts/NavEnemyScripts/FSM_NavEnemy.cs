@@ -1,18 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class FSM_NavEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public NavEnemyState current;
+    public float newEnemySpeed = 0f;
+    public int newContact = 0;
+    public int newCurrentTarget = 0;
+
+    void FixedUpdate()
     {
-        
+        NavEnemyState next = current?.Run(newEnemySpeed, newContact);
+
+        if (next != null)
+        {
+            newEnemySpeed = current.enemySpeed;
+            newContact = current.contact;
+            current = next;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("goTo"))
+        {
+            newContact = 1;
+        }
+        else
+        {
+            if (other.CompareTag("Player"))
+            {
+                newContact = 2;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("goTo"))
+        {
+            newContact = 0;
+        }
+        else
+        {
+            if (other.CompareTag("Player"))
+            {
+                newContact = 0;
+            }
+        }
     }
 }
