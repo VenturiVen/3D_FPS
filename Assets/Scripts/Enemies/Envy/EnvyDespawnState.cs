@@ -12,7 +12,7 @@ public class EnvyDespawnState : EnvyState
         return this;
     }
 
-    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact)
+    public override EnvyState Run(Vector3 enemyDir, float enemySpeed, bool isGrounded, bool isPlayerContact, bool isEnemyContact, bool isPlayerSight)
     {
         // assigning variables
         this.enemyDir = enemyDir;

@@ -550,6 +550,8 @@ MonoBehaviour:
   newIsGrounded: 0
   newPlayerContact: 0
   newEnemyContact: 0
+  newPlayerSight: 0
+  player: {fileID: 231084042}
 --- !u!114 &103207332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +769,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 180
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -1125,6 +1127,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   idle: {fileID: 1638404420}
   timeToSpawn: 3
   spawnLocation: {x: 0, y: 0, z: 0}
@@ -1504,6 +1507,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d24b19387f6fc24eb8a29302eab29a3, type: 3}
+--- !u!1 &567181841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567181842}
+  - component: {fileID: 567181843}
+  m_Layer: 0
+  m_Name: NavMesh Link (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567181842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567181841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -14.21, y: -1.75, z: 3.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1004252611}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &567181843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567181841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_StartPoint: {x: 0, y: 0, z: 0}
+  m_EndPoint: {x: 0, y: 0, z: 5.94}
+  m_Width: 3
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 2
 --- !u!1 &590048906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,6 +1713,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   idle: {fileID: 1638404420}
   chase: {fileID: 854960054}
   coolDownTime: 3
@@ -1816,6 +1872,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   idle: {fileID: 1638404420}
   attack: {fileID: 804187744}
   jumpAttack: {fileID: 1563832372}
@@ -2030,6 +2087,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1422019302}
+  - {fileID: 567181842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194170220 stripped
@@ -2420,6 +2478,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   idle: {fileID: 1638404420}
   chase: {fileID: 854960054}
 --- !u!1 &1638404418
@@ -2471,6 +2530,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   chase: {fileID: 854960054}
   retreat: {fileID: 1831644707}
 --- !u!1 &1680308506
@@ -2726,6 +2786,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
 --- !u!1 &1787711012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6062800882515219677, guid: 6dd9c6c5a29e3f343910dcc3433092c8, type: 3}
@@ -2780,6 +2841,7 @@ MonoBehaviour:
   isGrounded: 0
   isPlayerContact: 0
   isEnemyContact: 0
+  isPlayerSight: 0
   chase: {fileID: 854960054}
   despawn: {fileID: 1754486583}
   spawn: {fileID: 403747535}
