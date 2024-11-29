@@ -41,6 +41,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject perkPanel;
 
+    // Added by Hersh: add a cooldown to the amount of times you can get hit by an enemy.
+    [SerializeField] private float damageCooldown = 0.5f;
+    private float lastDamageTime = 0f;
+    
     public void Start()
     {
         gameOverPanel.SetActive(false);
@@ -82,14 +86,20 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int num, Vector3 pos)
     {
-        knockbackPos = pos;
-        knockback = true;
-        currentHP -= num;
-
-        if (currentHP <= 0)
+        // Check if cooldown period finished.
+        if (Time.time >= lastDamageTime + damageCooldown)
         {
-            currentHP = 0;
-            PlayerDeath();
+            knockbackPos = pos;
+            knockback = true;
+            currentHP -= num;
+
+            if (currentHP <= 0)
+            {
+                currentHP = 0;
+                PlayerDeath();
+            }
+            
+            lastDamageTime = Time.time;
         }
     }
 
