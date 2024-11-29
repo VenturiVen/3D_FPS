@@ -68,6 +68,34 @@ public class Envy_FSM : MonoBehaviour
 
     }
 
+    public EnvyState getCurrentState()
+    {
+        return current;
+    }
+
+    public String CurrentStateAsString
+    {
+        get
+        {
+            switch (current)
+            {
+                case EnvySpawnState:
+                    return "Spawning";
+                case EnvyIdleState:
+                    return "Idling";
+                case EnvyChaseState:
+                    return "Chasing";
+                case EnvyAttackState:
+                    return "Attack!!!!";
+                case EnvyRetreatState:
+                    return "Retreating...";
+                case EnvyDespawnState:
+                    return "Despawning";
+            }
+            return "Null";
+        }
+    }
+
     // not seen in the game
     private void OnDrawGizmos()
     {

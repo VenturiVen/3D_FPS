@@ -20,6 +20,18 @@ public class EnvySpawnState : EnvyState
 
     public Vector3 spawnLocation = Vector3.zero;
 
+    //[SerializeField] GameObject ui;
+
+    //private void Start()
+    //{
+    //    ui = GetComponent<tempUIStates>();
+    //}
+    
+    //private void Awake()
+    //{
+    //    ui.ChangeText("Spawning");
+    //}
+
     public override EnvyState Run()
     {
         return this;

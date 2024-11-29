@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - DeathPlane
   - Enemy
+  - Indicator
   layers:
   - Default
   - TransparentFX

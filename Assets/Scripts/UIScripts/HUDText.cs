@@ -37,7 +37,7 @@ public class HUDText : MonoBehaviour
         textmeshpro_currentHP_text = textmeshpro_currentHP.GetComponent<TextMeshProUGUI>();
         textmeshpro_maxHP_text = textmeshpro_maxHP.GetComponent<TextMeshProUGUI>();
         //textmeshpro_currentAmmo_text = textmeshpro_currentAmmo.GetComponent<TextMeshProUGUI>();
-       //textmeshpro_maxAmmo_text = textmeshpro_maxAmmo.GetComponent<TextMeshProUGUI>();
+        //textmeshpro_maxAmmo_text = textmeshpro_maxAmmo.GetComponent<TextMeshProUGUI>();
         textmeshpro_score_text = textmeshpro_score.GetComponent<TextMeshProUGUI>();
     }
 
