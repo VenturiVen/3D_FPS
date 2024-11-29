@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 public class FlyingEnemyAI : MonoBehaviour
 {
     [Header("Model Settings")]
-    [SerializeField] private GameObject enemyModel; // New serialized field for the model
+    [SerializeField] private GameObject enemyModel;
+    
+    [SerializeField] private MeshRenderer meshRenderer;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 10f;
@@ -19,6 +23,8 @@ public class FlyingEnemyAI : MonoBehaviour
     [SerializeField] private float projectileCooldown = 2f;
     [SerializeField] private float projectileSpeed = 10f;
 
+    private NavMeshAgent navMeshAgent;
+    
     private Transform player;
     private EnemyState currentState;
     private FlyingPatrolState patrolState;
@@ -34,18 +40,44 @@ public class FlyingEnemyAI : MonoBehaviour
         spawnPoint = transform.position;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         
-        // Makes sure both Parent and EnemyModel are the same
+            // Add a NavMeshAgent component to the enemy.
+            navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+            // navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("FlyingOnly"); We can add this type later for mainGameScene.
+            navMeshAgent.speed = moveSpeed;
+            navMeshAgent.acceleration = (moveSpeed) / 2 + 10f;
+            navMeshAgent.angularSpeed = 720f;
+            navMeshAgent.height = 2f;
+            navMeshAgent.radius = 0.5f;
+            navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        
+        // Don't let Nav Mesh Agent change the height, height has to be close to 2.5, not <= 3, otherwise pathfinding fails.
+        navMeshAgent.baseOffset = hoverHeight;
+        navMeshAgent.updateRotation = false;
+        
+        // Makes sure both Parent and EnemyModel are rotating the same.
         if (enemyModel != null)
         {
             enemyModel.transform.position = transform.position;
             enemyModel.transform.rotation = transform.rotation;
         }
 
-        // Start off patrolling the area you spawned in
+        // Start off patrolling the area of the NavMesh.
         currentState = EnemyState.Patrolling;
         patrolState = new FlyingPatrolState(this);
         chaseState = new FlyingChaseState(this);
         attackState = new FlyingAttackState(this);
+
+        // Ensure the meshRenderer is assigned, otherwise log an error.
+        if (meshRenderer == null && enemyModel != null)
+        {
+            meshRenderer = enemyModel.GetComponent<MeshRenderer>();
+            if (meshRenderer == null)
+            {
+                Debug.LogError("MeshRenderer not assigned and not found on enemyModel!");
+            }
+        }
+
+        UpdateMaterialColor(); // Set the initial material color
     }
 
     // Check, update and execute changes.
@@ -54,8 +86,8 @@ public class FlyingEnemyAI : MonoBehaviour
         if (player == null) return;
         UpdateState();
         ExecuteState();
-
-        // Sync the nodel with the Parent FlyingEnemy.
+        
+        // Sync the model with the Parent FlyingEnemy.
         if (enemyModel != null)
         {
             enemyModel.transform.position = transform.position;
@@ -75,6 +107,7 @@ public class FlyingEnemyAI : MonoBehaviour
                 if (distanceToPlayer <= detectionRange)
                 {
                     currentState = EnemyState.Pursuing;
+                    UpdateMaterialColor();
                 }
                 break;
             
@@ -84,10 +117,12 @@ public class FlyingEnemyAI : MonoBehaviour
                 if (distanceToPlayer <= surroundDistance)
                 {
                     currentState = EnemyState.AttackMode;
+                    UpdateMaterialColor();
                 }
                 else if (distanceToPlayer > detectionRange)
                 {
                     currentState = EnemyState.Patrolling;
+                    UpdateMaterialColor();
                 }
                 break;
 
@@ -96,6 +131,7 @@ public class FlyingEnemyAI : MonoBehaviour
                 if (distanceToPlayer > surroundDistance)
                 {
                     currentState = EnemyState.Pursuing;
+                    UpdateMaterialColor();
                 }
                 break;
         }
@@ -130,18 +166,56 @@ public class FlyingEnemyAI : MonoBehaviour
     public Transform GetPlayer() => player;
     public float getSidetoSideSpeed() => sideToSideSpeed;
     public float getSidetoSideAmplitude() => sideToSideAmplitude;
-    public GameObject GetEnemyModel() => enemyModel;
+    public NavMeshAgent GetNavMeshAgent() => navMeshAgent;
+    
+    private void SmoothRotationTransition()
+    {
+        Vector3 directionToTarget = (spawnPoint - transform.position).normalized;
+    
+        if (directionToTarget.sqrMagnitude > 0.001f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+
+    // Added method to update the material color based on the current state.
+    private void UpdateMaterialColor()
+    {
+        if (meshRenderer == null) return;
+
+        switch (currentState)
+        {
+            case EnemyState.Patrolling:
+                meshRenderer.material.color = Color.green;
+                break;
+            case EnemyState.Pursuing:
+                meshRenderer.material.color = Color.yellow;
+                break;
+            case EnemyState.AttackMode:
+                meshRenderer.material.color = Color.red;
+                break;
+        }
+    }
+
+    public void SmoothRotateTowards(Vector3 targetPosition)
+    {
+        // Get the norm of the distance between target and enemy to get the direction.
+        Vector3 directionToTarget = (targetPosition - transform.position).normalized;
+
+        // With the direction, we interpolate the rotation between the enemy and the target using
+        // Slerp if the direction to the target is offset. 
+        if (directionToTarget.sqrMagnitude > 0.001f) // When
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
+    }
 
     
-    // Draw Radii and Range of Patrol, detection for the enemy and surrounding the enemy including the raycast of the enemy.
+    // Draw Radii and Range of detection for the enemy and surrounding the enemy including the raycast of the enemy.
     private void OnDrawGizmosSelected()
     {
-        // If there is no Spawner used to spawn the enemy, use current position in Edit mode.
-        Vector3 currentSpawnPoint = spawnPoint != Vector3.zero ? spawnPoint : transform.position;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(currentSpawnPoint, patrolRadius);
-
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 

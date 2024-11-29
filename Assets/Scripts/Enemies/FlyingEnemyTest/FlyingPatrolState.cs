@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class FlyingPatrolState : FlyingState
 {
     private Vector3 spawnPoint;
-    private Vector3 RandomTarget;
+    private Vector3 randomTarget;
+    private float waypointTimer;
+    private const float waypointInterval = 2.5f;
 
     public FlyingPatrolState(FlyingEnemyAI enemyAI) : base(enemyAI)
     {
-        this.spawnPoint = enemyAI.transform.position;
+        spawnPoint = enemyAI.transform.position;
     }
 
     public override void Execute()
@@ -15,33 +18,41 @@ public class FlyingPatrolState : FlyingState
         Patrol();
     }
 
-    // In our assigned spawn point, create a radius to patrol an area.
+    // Patrol around the NavMeshSurface at random points.
     private void Patrol()
     {
-        // If no patrol targets have been set, generate new random targets. 
-        if (RandomTarget == Vector3.zero || Vector3.Distance(enemyAI.transform.position, RandomTarget) < 1f)
-        {
-            // Go to random points within the radius.
-            Vector2 randomCircle = Random.insideUnitCircle * enemyAI.GetPatrolRadius();
-            RandomTarget = spawnPoint + new Vector3(randomCircle.x, 0, randomCircle.y);
-            // Maintain a constant hover height to stay flying.
-            RandomTarget.y = spawnPoint.y + enemyAI.GetHoverHeight();
-        }
+        NavMeshAgent agent = enemyAI.GetNavMeshAgent();
 
-        MoveTowards(RandomTarget);
+        // Update the waypoint if there is no random target, if the enemy has reached the way point or if the timer is completed.
+        waypointTimer += Time.deltaTime;
+        if (randomTarget == Vector3.zero || agent.remainingDistance <= agent.stoppingDistance || waypointTimer >= waypointInterval)
+        {
+            // Select a random point on the NavMesh.
+            Vector3 randomPoint;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(RandomNavmeshLocation(), out hit, 1000f, NavMesh.AllAreas))
+            {
+                randomPoint = hit.position;
+                randomTarget = randomPoint;
+                randomTarget.y = spawnPoint.y + enemyAI.GetHoverHeight();
+
+                // Go to the random target that's set by the NavMeshAgent and reset the timer.
+                agent.SetDestination(randomTarget);
+                waypointTimer = 0f;
+            }
+        }
+        
+        if (agent.velocity.sqrMagnitude > 0.1f)
+        {
+            enemyAI.SmoothRotateTowards(agent.steeringTarget);
+        }
     }
-
-    private void MoveTowards(Vector3 target)
+    
+    private Vector3 RandomNavmeshLocation()
     {
-        // Move the enemy to the player.
-        Vector3 direction = (target - enemyAI.transform.position).normalized;
-        enemyAI.transform.position += direction * enemyAI.GetMoveSpeed() * Time.deltaTime;
-
-        // If the player exists, lock on to the player.
-        if (enemyAI.GetPlayer() != null)
-        {
-            Vector3 lookDirection = (enemyAI.GetPlayer().position - enemyAI.transform.position).normalized;
-            enemyAI.transform.rotation = Quaternion.LookRotation(lookDirection);
-        }
+        // Go to a random direction, obtained from a wide range to make it modular for multiple use cases.
+        Vector3 randomDirection = Random.insideUnitSphere * 500f;
+        randomDirection += enemyAI.transform.position;
+        return randomDirection;
     }
 }

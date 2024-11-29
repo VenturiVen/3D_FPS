@@ -1,11 +1,13 @@
 ﻿﻿using UnityEngine;
+
 public class FlyingAttackState : FlyingState
 {
     private float shootTimer;
     private float previousNoiseX;
     private float previousNoiseZ;
-    
+
     private float noiseSmoothingFactor = 5f;
+
     public FlyingAttackState(FlyingEnemyAI enemyAI) : base(enemyAI)
     {
     }
@@ -13,16 +15,18 @@ public class FlyingAttackState : FlyingState
     public override void Execute()
     {
         AttackMode();
+        FacePlayerContinuously();
         TryShoot();
+
     }
 
     private void AttackMode()
     {
         float sideToSideSpeed = enemyAI.getSidetoSideSpeed();
         float sideToSideAmplitude = enemyAI.getSidetoSideAmplitude();
+        Transform player = enemyAI.GetPlayer();
         
         // Early return if no player is available
-        Transform player = enemyAI.GetPlayer();
         if (player == null) return; // Return nothing if Player is destroyed or not there.
 
         // Calculate direction to the player, then create a radius and try and keep the player in the radius via fixedPos.
@@ -40,7 +44,7 @@ public class FlyingAttackState : FlyingState
         noiseZ = Mathf.Lerp(previousNoiseZ, noiseZ, Time.deltaTime * noiseSmoothingFactor);
         previousNoiseX = noiseX;
         previousNoiseZ = noiseZ;
-        
+
         // Create an offset based off the Perlin Noise.
         Vector3 noiseOffset = new Vector3(noiseX, 0, noiseZ) * sideToSideAmplitude;
         Vector3 targetPosition = fixedPosition + noiseOffset;
@@ -48,13 +52,12 @@ public class FlyingAttackState : FlyingState
         // Move towards the player.
         MoveTowards(targetPosition);
     }
-    
 
     private void TryShoot()
     {
         // Start a timer via deltaTime to detect when its ready to shoot past the cooldown.
         shootTimer += Time.deltaTime;
-        
+
         // When the enemy is aiming correctly, and the timer has passed the cooldown, you can shoot.
         if (shootTimer >= enemyAI.GetProjectileCooldown() && RaycastHitsPlayer())
         {
@@ -78,12 +81,12 @@ public class FlyingAttackState : FlyingState
     {
         // If there's no Projectile or RaycastObject available, return nothing.
         if (enemyAI.GetProjectilePrefab() == null || enemyAI.GetRaycastOrigin() == null) return;
-        
+
         // Instantiate projectile, then set the velocity of projectile via rigidbody.
         GameObject projectile = Object.Instantiate(enemyAI.GetProjectilePrefab(), enemyAI.GetRaycastOrigin().position, enemyAI.GetRaycastOrigin().rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.velocity = enemyAI.GetRaycastOrigin().forward * enemyAI.GetProjectileSpeed();
-        
+
         // Check if projectile has the Script attached. If it does, homing is set.
         EnemyProjectile projectileScript = projectile.GetComponent<EnemyProjectile>();
         if (projectileScript != null)
@@ -96,5 +99,24 @@ public class FlyingAttackState : FlyingState
     {
         Vector3 direction = (target - enemyAI.transform.position).normalized;
         enemyAI.transform.position += direction * enemyAI.GetMoveSpeed() * Time.deltaTime;
+    }
+
+    private void FacePlayerContinuously()
+    {
+        // Return if no player is available
+        Transform player = enemyAI.GetPlayer();
+        if (player == null) return;
+        
+        // Get the norm of the distance between player and enemy to get the direction.
+
+        Vector3 directionToPlayer = (player.position - enemyAI.transform.position).normalized;
+        
+        // With the direction, we interpolate the rotation between the enemy and the target using
+        // Slerp if the direction to the player is offset. 
+        if (directionToPlayer.sqrMagnitude > 0.001f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+            enemyAI.transform.rotation = Quaternion.Slerp(enemyAI.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 }
