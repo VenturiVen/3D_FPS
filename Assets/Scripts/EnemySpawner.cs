@@ -4,19 +4,38 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject zombie;
+    [SerializeField] private GameObject agent;
     private Vector3 spawnPos = Vector3.zero;
-    private bool playerIsInRange = false;
+    private bool agentSpawned = false;
     public int starterTimer = 300;
     public int keep = 0;
+    public Transform player;
+
     void Update()
     {
-        if (playerIsInRange && starterTimer == 0)
+        if ((Vector3.Distance(transform.position, player.position)) < 15f && starterTimer == 0)
         {
             float x = Random.Range(-5f, 5f) + transform.position.x;
             float z = Random.Range(-5f, 5f) + transform.position.z;
             float y = transform.position.y;
-            Instantiate(prefab, new Vector3(x, y, z), Quaternion.identity);
+
+            if (PlayerStats.Instance.currentScore > 2000 && agentSpawned == false)
+            {
+                if (Random.Range(0, 1f) > 0.5f)
+                {
+                    Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+                    agentSpawned = true;
+                }
+                else
+                {
+                    Instantiate(zombie, new Vector3(x, y, z), Quaternion.identity);
+                }
+            }
+            else
+            {
+                Instantiate(zombie, new Vector3(x, y, z), Quaternion.identity);
+            }
             starterTimer = PlayerStats.Instance.timer - keep;
 
             if (keep < 250)
@@ -31,21 +50,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDrawGizmos()
     {
-        // Check if the colliding object is a projectile
-        if (other.CompareTag("Player"))
-        {
-            playerIsInRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerIsInRange = false;
-            keep = 0;
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, 15f);
     }
 }

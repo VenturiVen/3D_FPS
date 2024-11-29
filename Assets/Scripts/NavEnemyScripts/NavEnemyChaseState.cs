@@ -11,11 +11,14 @@ public class NavEnemyChaseState : NavEnemyState
     public NavEnemyPatrolState patrol;
     public NavEnemyWaitState wait;
     public Transform player;
+    public GameObject jello;
 
     private void Start()
     {
         player = GameObject.Find("Player_PSX").transform;
+        jello = GameObject.Find("Jello");
     }
+
     public override NavEnemyState Run()
     {
         return this;
@@ -34,6 +37,7 @@ public class NavEnemyChaseState : NavEnemyState
             // Returns on the path to the node it was previously travelling towards
             Debug.Log("Agent: No longer chasing the player, back on patrol");
             this.enemySpeed = 2f;
+            jello.transform.position -= new Vector3(0f, 1f, 0f);
             return patrol;
         }
 
@@ -41,6 +45,7 @@ public class NavEnemyChaseState : NavEnemyState
         {
             PlayerStats.Instance.TakeDamage(50, transform.position);
             this.enemySpeed = 0f;
+            jello.transform.position -= new Vector3(0f, 1f, 0f);
             return wait;
         }
         return this;

@@ -13,6 +13,7 @@ public class NavEnemyPatrolState : NavEnemyState
     public Transform goTo3;
     public Transform goTo4;
     public Transform player;
+    public GameObject jello;
     private List<Transform> goToList = new List<Transform>();
     private int index = 0;
     public int lastContact = 0;
@@ -24,6 +25,7 @@ public class NavEnemyPatrolState : NavEnemyState
         goTo2 = GameObject.Find("goTo2").transform;
         goTo3 = GameObject.Find("goTo3").transform;
         goTo4 = GameObject.Find("goTo4").transform;
+        jello = GameObject.Find("Jello");
         player = GameObject.Find("Player_PSX").transform;
 
         goToList.Add(goTo1);
@@ -31,6 +33,7 @@ public class NavEnemyPatrolState : NavEnemyState
         goToList.Add(goTo3);
         goToList.Add(goTo4);
     }
+
     public override NavEnemyState Run()
     {
         return this;
@@ -68,6 +71,7 @@ public class NavEnemyPatrolState : NavEnemyState
                 {
                     Debug.Log("Now chasing the player");
                     this.enemySpeed = 4f;
+                    jello.transform.position += new Vector3(0f, 1f, 0f);
                     return chase;
                 }
             }

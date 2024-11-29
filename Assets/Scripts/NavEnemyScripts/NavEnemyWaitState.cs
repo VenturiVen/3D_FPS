@@ -8,6 +8,13 @@ public class NavEnemyWaitState : NavEnemyState
     private int timer = 100;
     public NavMeshAgent agent;
     public NavEnemyChaseState chase;
+    public GameObject jello;
+
+    private void Start()
+    {
+        jello = GameObject.Find("Jello");
+    }
+
     public override NavEnemyState Run()
     {
         return this;
@@ -25,6 +32,7 @@ public class NavEnemyWaitState : NavEnemyState
             Debug.Log("Agent: Going back to chasing the Player");
             this.enemySpeed = 4f;
             timer = 100;
+            jello.transform.position += new Vector3(0f, 1f, 0f);
             return chase;
         }
 

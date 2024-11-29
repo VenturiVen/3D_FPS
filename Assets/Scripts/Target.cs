@@ -6,20 +6,13 @@ public class Target : MonoBehaviour, IDamageble
 {
     private float health = 100f;
     private PlayerStats playerStats;
-    private AudioSource sound;
 
     [SerializeField] private ParticleSystem killParticles;
     private ParticleSystem killParticlesInstance;
 
-    private void Start()
-    {
-        sound = GetComponent<AudioSource>();
-    }
-
     public void Damage(float damage)
     {
         health -= damage;
-        sound.Play();
         Debug.Log($"{gameObject.name} took {damage} damage. Remaining health: {health}");
 
         if (health <= 0)
