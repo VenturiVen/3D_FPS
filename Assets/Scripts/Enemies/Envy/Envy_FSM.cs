@@ -19,10 +19,16 @@ public class Envy_FSM : MonoBehaviour
     public bool newPlayerSight = false;
     RaycastHit ray;
 
-    public Transform player;
+    public GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void FixedUpdate()
     {
+
         // state transition
         // once a state is called, its public variables are passed as params
         // for instantiating the next state
@@ -42,7 +48,7 @@ public class Envy_FSM : MonoBehaviour
 
         if (newPlayerContact)
         {
-            if (Physics.Linecast(transform.position, player.position, out ray))
+            if (Physics.Linecast(transform.position, player.transform.position, out ray))
             {
                 if (ray.collider.CompareTag("Player"))
                 {

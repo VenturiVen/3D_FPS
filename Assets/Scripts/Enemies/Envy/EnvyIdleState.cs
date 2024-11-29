@@ -14,7 +14,7 @@ public class EnvyIdleState : EnvyState
     Coroutine coroutine;
     private bool countdownFinished = false;
     private bool countdownStarted = false;
-    private int timeBeforeRetreat = 5; // how much time the player can be out of range before Envy retreats
+    public int timeBeforeRetreat = 5; // how much time the player can be out of range before Envy retreats
 
     public override EnvyState Run()
     {

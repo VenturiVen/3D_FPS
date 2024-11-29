@@ -22,11 +22,12 @@ public class EnvyChaseState : EnvyState
 
     //NavMesh
     public GameObject Envy;
-    public Transform player;
+    public GameObject player;
     private NavMeshAgent navMeshAgent;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         navMeshAgent = Envy.GetComponent<NavMeshAgent>();
     }
 
@@ -47,7 +48,7 @@ public class EnvyChaseState : EnvyState
         // target equals player's current position
         // target = PlayerStats.Instance.currentPos;
         // distance equals player's current position minus Envy's current position
-        distance = Vector3.Distance(player.position, gameObject.transform.position);
+        distance = Vector3.Distance(player.transform.position, gameObject.transform.position);
 
         if (!isPlayerContact) 
         {
@@ -67,12 +68,14 @@ public class EnvyChaseState : EnvyState
             return jumpAttack;
         }
         */
+
+
         
-        navMeshAgent.destination = player.position;
+        navMeshAgent.destination = player.transform.position;
 
 
         // target.y = 0f;
-        transform.parent.parent.LookAt(player.position);
+        transform.parent.parent.LookAt(player.transform.position);
 
         return this;
     }
