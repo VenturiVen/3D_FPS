@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4439b2405690cb24dbce64e4341cd5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  envy: {fileID: 3481370313866714003, guid: 61c9706e9a66ebb4399f133e5a288913, type: 3}
+  envy: {fileID: 6965919767364674667, guid: 61c9706e9a66ebb4399f133e5a288913, type: 3}
   spawnPt: {fileID: 1825079871}
   spawnLimit: 2
 --- !u!4 &1825079873
@@ -2074,7 +2074,7 @@ Transform:
   m_GameObject: {fileID: 1825079871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.13, y: -18.04978, z: 43.14}
+  m_LocalPosition: {x: -10.39, y: -18.04978, z: 43.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

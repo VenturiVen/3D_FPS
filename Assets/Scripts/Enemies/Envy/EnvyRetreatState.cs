@@ -32,7 +32,7 @@ public class EnvyRetreatState : EnvyState
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
 
-        if (!isPlayerContact)
+        if (!isPlayerSight)
         {
             //transform.parent.parent.position =
             //Vector3.MoveTowards(transform.position, spawn.getSpawnLocation(),
@@ -40,13 +40,11 @@ public class EnvyRetreatState : EnvyState
             navMeshAgent.destination = spawn.getSpawnLocation();
         }
 
-        if (isPlayerContact)
+        if (isPlayerSight)
         {
-            if (isPlayerSight)
-            {
-                Debug.Log("Chase State");
-                return chase;
-            }
+            Debug.Log("Chase State");
+            return chase;
+            
         }
 
         // Vector3.Distance(target, gameObject.transform.position);

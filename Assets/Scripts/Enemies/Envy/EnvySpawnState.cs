@@ -58,6 +58,8 @@ public class EnvySpawnState : EnvyState
         }
         else if (countdownFinished) // if countdown has finished, switch to idle state
         {
+            countdownFinished = false;
+            countdownStarted = false;
             // set initial location as Envy's spawn location
             setSpawnLocation();
 

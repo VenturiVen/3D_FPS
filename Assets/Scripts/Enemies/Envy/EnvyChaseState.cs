@@ -12,18 +12,21 @@ public class EnvyChaseState : EnvyState
     public EnvyAttackState attack;
     public EnvyJumpAttackState jumpAttack;
 
-    // desired differences between Envy and player in order to switch to either attack or jumpattack states
-    public float distToAttack = 5f;
-    public float distoJumpAttack = 5f;
-    // target is the player's current location
-    Vector3 target = Vector3.zero;
-    // distance is the difference between the player and Envy's current location
-    float distance = 0f;
+    //// target is the player's current location
+    //Vector3 target = Vector3.zero;
+    //// distance is the difference between the player and Envy's current location
+    //float distance = 0f;
 
     //NavMesh
     public GameObject Envy;
     public GameObject player;
     private NavMeshAgent navMeshAgent;
+
+    // variables for coroutine
+    Coroutine coroutine;
+    private bool countdownStarted = false;
+    private bool countdownFinished = false;
+    [SerializeField] private int idleDelay = 3;
 
     private void Start()
     {
@@ -45,38 +48,44 @@ public class EnvyChaseState : EnvyState
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
 
+        // NO LONGER NEEDED!
         // target equals player's current position
         // target = PlayerStats.Instance.currentPos;
         // distance equals player's current position minus Envy's current position
-        distance = Vector3.Distance(player.transform.position, gameObject.transform.position);
+        // distance = Vector3.Distance(player.transform.position, gameObject.transform.position);
 
-        if (!isPlayerContact) 
-        {
-            Debug.Log("Idle State");
-            return idle;
-        }
-
-        if (distance <= distToAttack)
+        if (isPlayerContact)
         {
             Debug.Log("Attack State");
             return attack;
         }
-        /*
-        if (distance <= distoJumpAttack) 
+
+        if (!isPlayerSight)
         {
-            Debug.Log("Jump Attack State");
-            return jumpAttack;
+            if (!countdownStarted)
+            {
+                countdownStarted = true;
+                coroutine = StartCoroutine(IdleDelay(idleDelay));
+            } else if (countdownFinished)
+            {
+                countdownStarted = false;
+                countdownFinished = false;
+                Debug.Log("Idle State");
+                return idle;
+            }
         }
-        */
 
-
-        
         navMeshAgent.destination = player.transform.position;
 
-
-        // target.y = 0f;
         transform.parent.parent.LookAt(player.transform.position);
 
         return this;
+    }
+
+    IEnumerator IdleDelay(int idleDelay)
+    {
+        //Debug.Log("Countdown started.");
+        yield return new WaitForSecondsRealtime(idleDelay);
+        countdownFinished = true;
     }
 }

@@ -14,7 +14,6 @@ public class EnvyAttackState : EnvyState
     // variables for coroutine
     Coroutine coroutine;
     private bool countdownFinished = false;
-    private bool countdownStarted = false;
     public int coolDownTime = 3; // time after attacking before Envy can attack again
 
     public override EnvyState Run()
@@ -31,27 +30,24 @@ public class EnvyAttackState : EnvyState
         this.isPlayerContact = isPlayerContact;
         this.isEnemyContact = isEnemyContact;
         
-        if (!playerHit || !countdownStarted)
+        if (playerHit == false)
         {
             Debug.Log("Player Hit!");
             PlayerStats.Instance.TakeDamage(20, transform.position);
             playerHit = true;
-            countdownStarted = true;
             coroutine = StartCoroutine(AttackCooldown(coolDownTime));
-            return this;
         }
         
         if (countdownFinished)
         {
             countdownFinished = false;
             playerHit = false;
-            countdownStarted = false;
             Debug.Log("Chase State");
             return chase;
         }
        
         return this;
-        
+
     }
 
     IEnumerator AttackCooldown(int coolDownTime)

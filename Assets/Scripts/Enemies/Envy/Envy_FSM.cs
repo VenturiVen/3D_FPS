@@ -46,8 +46,6 @@ public class Envy_FSM : MonoBehaviour
             current = next;
         }
 
-        if (newPlayerContact)
-        {
             if (Physics.Linecast(transform.position, player.transform.position, out ray))
             {
                 if (ray.collider.CompareTag("Player"))
@@ -55,7 +53,6 @@ public class Envy_FSM : MonoBehaviour
                     newPlayerSight = true;
                 }
             }
-        }
 
         if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out ray, 1f))
         {
