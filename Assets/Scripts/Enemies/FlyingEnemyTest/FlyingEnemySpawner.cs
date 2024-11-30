@@ -14,6 +14,15 @@ public class FlyingEnemySpawner : MonoBehaviour
     private float spawnTimer = 0f;
     private GameObject currentEnemyInstance = null;
 
+
+    void Start()
+    {
+        float x = Random.Range(-5f, 5f) + transform.position.x;
+        float z = Random.Range(-5f, 5f) + transform.position.z;
+        float y = transform.position.y;
+        currentEnemyInstance = Instantiate(prefab, new Vector3(x, y, z), Quaternion.identity);
+    }
+
     void Update()
     {
         if (!playerIsInRange) return;

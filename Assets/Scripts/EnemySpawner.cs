@@ -31,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     private void OnTriggerEnter(Collider other)
     {
         // Check if the colliding object is a projectile
@@ -48,4 +49,11 @@ public class EnemySpawner : MonoBehaviour
             keep = 0;
         }
     }
+=======
+    //private void OnDrawGizmos()
+    //{
+     //   Gizmos.color = Color.yellow;
+     //   Gizmos.DrawSphere(transform.position, 15f);
+    //}
+>>>>>>> Stashed changes
 }

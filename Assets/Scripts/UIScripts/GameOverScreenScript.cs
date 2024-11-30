@@ -8,7 +8,7 @@ public class GameOverScript : MonoBehaviour
     public void RestartBtn()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game_FlyingEnemyTest");
     }
     
     public void ToMenuBtn()

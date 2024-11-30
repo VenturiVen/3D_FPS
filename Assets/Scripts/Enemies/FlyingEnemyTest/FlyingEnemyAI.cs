@@ -42,17 +42,16 @@ public class FlyingEnemyAI : MonoBehaviour
         
             // Add a NavMeshAgent component to the enemy.
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            // navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("FlyingOnly"); We can add this type later for mainGameScene.
+            navMeshAgent.agentTypeID = NavMesh.GetSettingsByIndex(2).agentTypeID; // Set agent type to FlyingEnemy
             navMeshAgent.speed = moveSpeed;
             navMeshAgent.acceleration = (moveSpeed) / 2 + 10f;
             navMeshAgent.angularSpeed = 720f;
             navMeshAgent.height = 2f;
             navMeshAgent.radius = 0.5f;
             navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-        
-        // Don't let Nav Mesh Agent change the height, height has to be close to 2.5, not <= 3, otherwise pathfinding fails.
-        navMeshAgent.baseOffset = hoverHeight;
-        navMeshAgent.updateRotation = false;
+    
+            navMeshAgent.baseOffset = hoverHeight;
+            navMeshAgent.updateRotation = false;
         
         // Makes sure both Parent and EnemyModel are rotating the same.
         if (enemyModel != null)
@@ -66,16 +65,6 @@ public class FlyingEnemyAI : MonoBehaviour
         patrolState = new FlyingPatrolState(this);
         chaseState = new FlyingChaseState(this);
         attackState = new FlyingAttackState(this);
-
-        // Ensure the meshRenderer is assigned, otherwise log an error.
-        if (meshRenderer == null && enemyModel != null)
-        {
-            meshRenderer = enemyModel.GetComponent<MeshRenderer>();
-            if (meshRenderer == null)
-            {
-                Debug.LogError("MeshRenderer not assigned and not found on enemyModel!");
-            }
-        }
 
         UpdateMaterialColor(); // Set the initial material color
     }
