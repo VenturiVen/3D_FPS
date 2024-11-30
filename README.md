@@ -4,7 +4,25 @@ Group project for module CS4096 - ARTIFICIAL INTELLIGENCE FOR GAMES and also ent
 ## Contributors
 Leo O'Shea, Evan Buggy, Hershel Singh
 
-## Resources Used
-- [Title](link)
-- [FPS Game in Unity YouTube Playlist by Natty GameDev](https://youtube.com/playlist?list=PLGUw8UNswJEOv8c5ZcoHarbON6mIEUFBC&si=N5UTq8l56mSEY38q)
-- 
+## How to use and Run
+### How to get exe file (if exe file is not already provided)
+- Open project in Unity editor
+- Go to File > Build Settings
+- Select which scenes to include in your build
+- Click 'Build'
+- Select folder to download build files and exe to
+- Done!
+
+### How to run game (with exe file)
+- Open folder where build/exe is saved
+- Open exe file (Codex Gigas.exe)
+- Done!
+
+### Game Controls
+- Move: WASD
+- Look: Mouse
+- Jump: Spacebar
+- Shoot: Mouse1 (Left Click)
+- Weapon 1: Number key '1'
+- Weapon 2: Number key '2'
+- Close Game: Alt + F4
