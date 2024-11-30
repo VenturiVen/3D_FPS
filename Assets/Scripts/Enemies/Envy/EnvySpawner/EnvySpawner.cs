@@ -27,7 +27,7 @@ public class EnvySpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (envyNum > spawnLimit)
+            if (envyNum > 0)
             {
                 SpawnEnvy();
             }
@@ -43,5 +43,10 @@ public class EnvySpawner : MonoBehaviour
                 SpawnEnvy();
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        envyNum++;
     }
 }
