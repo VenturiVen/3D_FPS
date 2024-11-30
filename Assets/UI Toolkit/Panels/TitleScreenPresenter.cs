@@ -22,7 +22,7 @@ public class TitleScreenPresenter : MonoBehaviour
         look for visual element of type Button named Start
         */
 
-        root.Q<Button>("Start").clicked += () => ChangeScene("Game");
+        root.Q<Button>("Start").clicked += () => ChangeScene("Game_FlyingEnemyTest");
 
         root.Q<Button>("Exit").clicked += () => ExitGame();
     }
