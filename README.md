@@ -2,7 +2,9 @@
 Group project for module CS4096 - ARTIFICIAL INTELLIGENCE FOR GAMES and also entry for this Game Jam: https://itch.io/jam/irish-collab-jam
 
 ## Contributors
-Leo O'Shea, Evan Buggy, Hershel Singh
+Leo O'Shea 22342761
+Evan Buggy 22348069
+Hershel Singh 23371137
 
 ## How to use and Run
 ### How to get exe file (if exe file is not already provided)
