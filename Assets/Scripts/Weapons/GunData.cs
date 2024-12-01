@@ -29,7 +29,7 @@ public class GunData : ScriptableObject
     
     // public float damageDropoff?
     // public float randomness (for recoil?)
-
+    
     public int getCurrentCapacity()
     {
         return curCapacity;
