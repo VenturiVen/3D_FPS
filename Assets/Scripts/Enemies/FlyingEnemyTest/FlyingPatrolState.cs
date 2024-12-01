@@ -16,6 +16,7 @@ public class FlyingPatrolState : FlyingState
     public override void Execute()
     {
         Patrol();
+        Debug.Log("Patrol State active.");
     }
 
     // Patrol around the NavMeshSurface at random points.

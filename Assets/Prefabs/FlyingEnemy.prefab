@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyModel: {fileID: 86861541283382075}
   meshRenderer: {fileID: 2017025493608084743}
-  moveSpeed: 7
+  moveSpeed: 4
   patrolRadius: 5
   hoverHeight: 2.4
   detectionRange: 12.5

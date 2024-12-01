@@ -16,6 +16,7 @@ public class FlyingAttackState : FlyingState
     {
         AttackMode();
         FacePlayerContinuously();
+        Debug.Log("Attack State active.");
         TryShoot();
 
     }

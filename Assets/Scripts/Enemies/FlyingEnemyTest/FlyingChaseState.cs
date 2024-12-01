@@ -14,6 +14,8 @@ public class FlyingChaseState : FlyingState
     public override void Execute()
     {
         PursuePlayer();
+        Debug.Log("Chase State active.");
+
     }
 
     private void PursuePlayer()

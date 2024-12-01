@@ -42,9 +42,9 @@ public class FlyingEnemyAI : MonoBehaviour
         
             // Add a NavMeshAgent component to the enemy.
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            navMeshAgent.agentTypeID = NavMesh.GetSettingsByIndex(2).agentTypeID; // Set agent type to FlyingEnemy
+            navMeshAgent.agentTypeID = NavMesh.GetSettingsByIndex(2).agentTypeID;
             navMeshAgent.speed = moveSpeed;
-            navMeshAgent.acceleration = (moveSpeed) / 2 + 10f;
+            navMeshAgent.acceleration = (moveSpeed) / 2 + 5f;
             navMeshAgent.angularSpeed = 720f;
             navMeshAgent.height = 2f;
             navMeshAgent.radius = 0.5f;
@@ -194,7 +194,7 @@ public class FlyingEnemyAI : MonoBehaviour
 
         // With the direction, we interpolate the rotation between the enemy and the target using
         // Slerp if the direction to the target is offset. 
-        if (directionToTarget.sqrMagnitude > 0.001f) // When
+        if (directionToTarget.sqrMagnitude > 0.001f) 
         {
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
