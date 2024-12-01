@@ -1,7 +1,10 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script was made with the help of this YouTube video:
+// https://www.youtube.com/watch?v=kXbQMhwj5Uc
+ 
 [CreateAssetMenu(fileName="Weapon", menuName="Lazer Staff")]
 public class GunData : ScriptableObject
 {

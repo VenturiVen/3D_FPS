@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script was made with the help of this YouTube video:
+// https://www.youtube.com/watch?v=kasbsBho9ZM
+
 public class WeaponSwitching : MonoBehaviour
 {
     [Header("References:")]

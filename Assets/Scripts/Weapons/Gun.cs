@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+// This script was made with the help of this YouTube video:
+// https://www.youtube.com/watch?v=kXbQMhwj5Uc
+
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GunData gunData;

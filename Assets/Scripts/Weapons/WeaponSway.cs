@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script was made with the help of this YouTube video:
+// https://www.youtube.com/watch?v=QIVN-T-1QBE
+
 public class WeaponSway : MonoBehaviour
 {
     [Header("Sway Settings")] 

@@ -35,8 +35,7 @@ public class Projectiles : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(initialPosition, transform.position) >=
-            maxDistance) // ensure projectiles only have range of max distance
+        if (Vector3.Distance(initialPosition, transform.position) >= maxDistance) // ensure projectiles only have range of max distance
         {
             Destroy(gameObject);
         }

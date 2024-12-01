@@ -1,13 +1,10 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 
 public class FlyingAttackState : FlyingState
 {
     private float shootTimer;
     private float previousNoiseX;
     private float previousNoiseZ;
-
-    private float noiseSmoothingFactor = 5f;
-
     public FlyingAttackState(FlyingEnemyAI enemyAI) : base(enemyAI)
     {
     }
@@ -23,34 +20,33 @@ public class FlyingAttackState : FlyingState
 
     private void AttackMode()
     {
+        Transform player = enemyAI.GetPlayer();
+    
+        // Early return if no player is available
+        if (player == null) return;
+
+        float surroundDistance = enemyAI.GetSurroundDistance();
         float sideToSideSpeed = enemyAI.getSidetoSideSpeed();
         float sideToSideAmplitude = enemyAI.getSidetoSideAmplitude();
-        Transform player = enemyAI.GetPlayer();
-        
-        // Early return if no player is available
-        if (player == null) return; // Return nothing if Player is destroyed or not there.
 
-        // Calculate direction to the player, then create a radius and try and keep the player in the radius via fixedPos.
-        Vector3 directionToPlayer = (enemyAI.transform.position - player.position).normalized;
-        Vector3 fixedPosition = player.position + directionToPlayer * enemyAI.GetSurroundDistance();
-        fixedPosition.y = player.position.y + enemyAI.GetHoverHeight();
+        // Calculate the direction to the player.
+        Vector3 directionToPlayer = (player.position - enemyAI.transform.position).normalized;
+    
+        // Calculate a circular radius around the player.
+        Vector3 playerRadius = player.position - directionToPlayer * surroundDistance;
+        playerRadius.y = player.position.y + enemyAI.GetHoverHeight();
 
-        // Use time since game started and Perlin Noise to create random values for the X-Z axis.
+        // Generate a random offset using Perlin noise.
         float time = Time.time * sideToSideSpeed;
-        float noiseX = Mathf.PerlinNoise(time, 0f) * 2f - 1f;
-        float noiseZ = Mathf.PerlinNoise(0f, time) * 2f - 1f;
+        float angle = Mathf.PerlinNoise(time, 0f) * Mathf.PI * 2f;
+    
+        // Create an offset to stay near the player.
+        Vector3 perpendicular = Vector3.Cross(directionToPlayer, Vector3.up).normalized;
+        Vector3 circularOffset = perpendicular * Mathf.Cos(angle) + Vector3.up * Mathf.Sin(angle);
+        circularOffset *= sideToSideAmplitude;
+        Vector3 targetPosition = playerRadius + circularOffset;
 
-        // Use Lerp to smooth transitions from previous noise values. ( did not help :c )
-        noiseX = Mathf.Lerp(previousNoiseX, noiseX, Time.deltaTime * noiseSmoothingFactor);
-        noiseZ = Mathf.Lerp(previousNoiseZ, noiseZ, Time.deltaTime * noiseSmoothingFactor);
-        previousNoiseX = noiseX;
-        previousNoiseZ = noiseZ;
-
-        // Create an offset based off the Perlin Noise.
-        Vector3 noiseOffset = new Vector3(noiseX, 0, noiseZ) * sideToSideAmplitude;
-        Vector3 targetPosition = fixedPosition + noiseOffset;
-
-        // Move towards the player.
+        // Move towards the target position
         MoveTowards(targetPosition);
     }
 
