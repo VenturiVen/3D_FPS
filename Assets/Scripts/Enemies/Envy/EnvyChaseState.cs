@@ -77,6 +77,7 @@ public class EnvyChaseState : EnvyState
 
         navMeshAgent.destination = player.transform.position;
 
+
         transform.parent.parent.LookAt(player.transform.position);
 
         return this;

@@ -36,7 +36,7 @@ public class Envy_FSM : MonoBehaviour
 
         if (next != null)
         {
-            // changing values to that of the new state
+            // passing the current boolean values to the new state
             newDir = current.enemyDir;
             newSpeed = current.enemySpeed;
             newIsGrounded = current.isGrounded;
@@ -46,13 +46,13 @@ public class Envy_FSM : MonoBehaviour
             current = next;
         }
 
-            if (Physics.Linecast(transform.position, player.transform.position, out ray))
+        if (Physics.Linecast(transform.position, player.transform.position, out ray))
+        {
+            if (ray.collider.CompareTag("Player"))
             {
-                if (ray.collider.CompareTag("Player"))
-                {
-                    newPlayerSight = true;
-                }
+                newPlayerSight = true;
             }
+        }
 
         if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out ray, 1f))
         {
@@ -92,8 +92,8 @@ public class Envy_FSM : MonoBehaviour
             return "Null";
         }
     }
-
-    // not seen in the game
+    
+    // not seen in the gameSS
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

@@ -36,6 +36,8 @@ public class EnvyIdleState : EnvyState
             // check if player is in sight
             if (isPlayerSight)
             {
+                countdownStarted = false;
+                countdownFinished = false;
                 Debug.Log("Chase State");
                 return chase;
             }
@@ -51,20 +53,10 @@ public class EnvyIdleState : EnvyState
         // check if player is still not in chase range after countdown finished
         else if (!isPlayerSight) 
         {
-            if (countdownFinished)
-            {
-                countdownFinished = false;
-                countdownStarted = false;
-                Debug.Log("Retreat State");
-                return retreat;
-            }
-        }
-        // check if player is in sight
-        else if (isPlayerSight) 
-        {
-            countdownStarted = false;
             countdownFinished = false;
-            return chase;
+            countdownStarted = false;
+            Debug.Log("Retreat State");
+            return retreat;
         }
 
         return this;
